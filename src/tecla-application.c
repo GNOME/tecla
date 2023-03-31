@@ -81,6 +81,27 @@ create_window (TeclaApplication  *app,
 }
 
 static void
+level_notify_cb (TeclaView  *view,
+		 GParamSpec *pspec,
+		 TeclaModel *model)
+{
+	int level;
+
+	level = tecla_view_get_current_level (view);
+	tecla_model_set_level (model, level);
+}
+
+static void
+connect_model (TeclaView *view,
+	       TeclaModel *model)
+{
+	tecla_view_set_model (view, model);
+	g_signal_connect_object (view, "notify::level",
+				 G_CALLBACK (level_notify_cb),
+				 model, 0);
+}
+
+static void
 tecla_application_activate (GApplication *app)
 {
 	TeclaApplication *tecla_app = TECLA_APPLICATION (app);
@@ -92,7 +113,7 @@ tecla_application_activate (GApplication *app)
 
 		window = create_window (tecla_app, &view);
 		model = tecla_model_new_from_layout_name (tecla_app->layout);
-		tecla_view_set_model (view, model);
+		connect_model (view, model);
 		g_clear_pointer (&tecla_app->layout, g_free);
 
 		gtk_window_present (window);
@@ -101,7 +122,7 @@ tecla_application_activate (GApplication *app)
 			tecla_app->main_window =
 				create_window (tecla_app, &tecla_app->main_view);
 			model = tecla_model_new_from_layout_name ("us");
-			tecla_view_set_model (tecla_app->main_view, model);
+			connect_model (tecla_app->main_view, model);
 		}
 
 		gtk_window_present (tecla_app->main_window);
