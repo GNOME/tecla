@@ -1,0 +1,17 @@
+button.tecla-key {
+    font-weight: 400;
+    background: #e1e1e1;
+}
+
+button.tecla-key:hover {
+    background: #ececec;
+}
+
+button.tecla-key:active {
+    background: #c3c3c3;
+}
+
+button.tecla-key:selected {
+    background: #3584e4;
+    color: #fff;
+}
