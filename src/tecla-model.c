@@ -26,11 +26,27 @@ struct _TeclaModel
 	struct xkb_keymap *xkb_keymap;
 };
 
+enum
+{
+	CHANGED,
+	N_SIGNALS,
+};
+
+static guint signals[N_SIGNALS] = { 0, };
+
 G_DEFINE_TYPE (TeclaModel, tecla_model, G_TYPE_OBJECT)
 
 static void
 tecla_model_class_init (TeclaModelClass *klass)
 {
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+	signals[CHANGED] =
+		g_signal_new ("changed",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      0, NULL, NULL, NULL,
+			      G_TYPE_NONE, 0);
 }
 
 static void

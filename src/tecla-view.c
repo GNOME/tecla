@@ -32,6 +32,7 @@ struct _TeclaView
 	GtkWidget *grid;
 	GHashTable *keys_by_name;
 	TeclaModel *model;
+	guint model_changed_id;
 };
 
 G_DEFINE_TYPE (TeclaView, tecla_view, GTK_TYPE_WIDGET)
@@ -307,12 +308,30 @@ tecla_view_new (void)
 	return g_object_new (TECLA_TYPE_VIEW, NULL);
 }
 
+static void
+model_changed_cb (TeclaModel *model,
+		  TeclaView  *view)
+{
+	update_view (view);
+}
+
 void
 tecla_view_set_model (TeclaView  *view,
 		      TeclaModel *model)
 {
+	if (view->model_changed_id) {
+		g_signal_handler_disconnect (view->model, view->model_changed_id);
+		view->model_changed_id = 0;
+	}
+
 	if (!g_set_object (&view->model, model))
 		return;
+
+	if (view->model) {
+		view->model_changed_id =
+			g_signal_connect (view->model, "changed",
+					  G_CALLBACK (model_changed_cb), view);
+	}
 
 	update_view (view);
 }
