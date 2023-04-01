@@ -43,6 +43,7 @@ struct _TeclaView
 	GList *level2_keys;
 	GList *level3_keys;
 	guint toggled_levels;
+	int level;
 };
 
 G_DEFINE_TYPE (TeclaView, tecla_view, GTK_TYPE_WIDGET)
@@ -51,6 +52,7 @@ enum
 {
 	PROP_0,
 	PROP_MODEL,
+	PROP_LEVEL,
 	N_PROPS,
 };
 
@@ -93,6 +95,9 @@ tecla_view_get_property (GObject    *object,
 	switch (prop_id) {
 	case PROP_MODEL:
 		g_value_set_object (value, view->model);
+		break;
+	case PROP_LEVEL:
+		g_value_set_int (value, view->level);
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -155,6 +160,27 @@ update_toggled_keys (TeclaView   *view,
 }
 
 static void
+update_level (TeclaView *view)
+{
+	int level;
+
+	if (view->toggled_levels == (LEVEL2_PRESSED | LEVEL3_PRESSED))
+		level = 3;
+	else if (view->toggled_levels == LEVEL3_PRESSED)
+		level = 2;
+	else if (view->toggled_levels == LEVEL2_PRESSED)
+		level = 1;
+	else
+		level = 0;
+
+	if (view->level == level)
+		return;
+
+	view->level = level;
+	g_object_notify (G_OBJECT (view), "level");
+}
+
+static void
 bind_state (GtkWidget     *w1,
 	    GtkStateFlags  old_flags,
 	    GtkWidget     *w2)
@@ -187,6 +213,7 @@ key_activated_cb (TeclaKey  *key,
 	g_signal_emit (view, signals[KEY_ACTIVATED], 0, name);
 
 	update_toggled_keys (view, name);
+	update_level (view);
 }
 
 static void
@@ -276,6 +303,12 @@ tecla_view_class_init (TeclaViewClass *klass)
 				     TECLA_TYPE_MODEL,
 				     G_PARAM_READWRITE |
 				     G_PARAM_CONSTRUCT_ONLY);
+	props[PROP_LEVEL] =
+		g_param_spec_int ("level",
+				  "Level",
+				  "Level",
+				  0, G_MAXINT, 0,
+				  G_PARAM_READABLE);
 
 	g_object_class_install_properties (object_class, N_PROPS, props);
 
@@ -302,6 +335,7 @@ key_pressed_cb (GtkEventControllerKey *controller,
 	g_signal_emit (view, signals[KEY_ACTIVATED], 0, name);
 
 	update_toggled_keys (view, name);
+	update_level (view);
 }
 
 static void
@@ -401,6 +435,7 @@ tecla_view_set_model (TeclaView  *view,
 		view->toggled_levels = 0;
 		update_toggled_key_list (view, view->level2_keys, LEVEL2_PRESSED);
 		update_toggled_key_list (view, view->level3_keys, LEVEL3_PRESSED);
+		update_level (view);
 
 		g_clear_list (&view->level2_keys, NULL);
 		g_clear_list (&view->level3_keys, NULL);
@@ -415,4 +450,11 @@ tecla_view_set_model (TeclaView  *view,
 	}
 
 	update_view (view);
+	g_object_notify (G_OBJECT (view), "level");
+}
+
+int
+tecla_view_get_current_level (TeclaView *view)
+{
+	return view->level;
 }

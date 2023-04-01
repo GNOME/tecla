@@ -33,3 +33,5 @@ GtkWidget * tecla_view_new (void);
 
 void tecla_view_set_model (TeclaView  *view,
 			   TeclaModel *model);
+
+int tecla_view_get_current_level (TeclaView *view);
