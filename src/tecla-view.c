@@ -470,6 +470,23 @@ tecla_view_get_current_level (TeclaView *view)
 	return view->level;
 }
 
+void
+tecla_view_set_current_level (TeclaView *view,
+			      int        level)
+{
+	guint toggled_levels = 0;
+
+	if (level == 3 || level == 2)
+		toggled_levels |= LEVEL3_PRESSED;
+	if (level == 3 || level == 1)
+		toggled_levels |= LEVEL2_PRESSED;
+
+	view->toggled_levels = toggled_levels;
+	update_toggled_key_list (view, view->level2_keys, LEVEL2_PRESSED);
+	update_toggled_key_list (view, view->level3_keys, LEVEL3_PRESSED);
+	update_level (view);
+}
+
 int
 tecla_view_get_num_levels (TeclaView *view)
 {

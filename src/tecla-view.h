@@ -36,4 +36,7 @@ void tecla_view_set_model (TeclaView  *view,
 
 int tecla_view_get_current_level (TeclaView *view);
 
+void tecla_view_set_current_level (TeclaView *view,
+				   int        level);
+
 int tecla_view_get_num_levels (TeclaView *view);
