@@ -29,6 +29,15 @@ struct _TeclaModel
 
 enum
 {
+	PROP_0,
+	PROP_NAME,
+	N_PROPS
+};
+
+static GParamSpec *props[N_PROPS] = { 0, };
+
+enum
+{
 	CHANGED,
 	N_SIGNALS,
 };
@@ -38,9 +47,29 @@ static guint signals[N_SIGNALS] = { 0, };
 G_DEFINE_TYPE (TeclaModel, tecla_model, G_TYPE_OBJECT)
 
 static void
+tecla_model_get_property (GObject    *object,
+			  guint       prop_id,
+			  GValue     *value,
+			  GParamSpec *pspec)
+{
+	TeclaModel *model = TECLA_MODEL (object);
+
+	switch (prop_id) {
+	case PROP_NAME:
+		g_value_set_string (value, tecla_model_get_name (model));
+		break;
+	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+		break;
+	}
+}
+
+static void
 tecla_model_class_init (TeclaModelClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+	object_class->get_property = tecla_model_get_property;
 
 	signals[CHANGED] =
 		g_signal_new ("changed",
@@ -48,6 +77,15 @@ tecla_model_class_init (TeclaModelClass *klass)
 			      G_SIGNAL_RUN_LAST,
 			      0, NULL, NULL, NULL,
 			      G_TYPE_NONE, 0);
+
+	props[PROP_NAME] =
+		g_param_spec_string ("name",
+				     "Name",
+				     "Name",
+				     NULL,
+				     G_PARAM_READABLE);
+
+	g_object_class_install_properties (object_class, N_PROPS, props);
 }
 
 static void
@@ -366,4 +404,10 @@ tecla_model_get_keyval (TeclaModel    *model,
 		return 0;
 
 	return syms[0];
+}
+
+const gchar *
+tecla_model_get_name (TeclaModel *model)
+{
+	return xkb_keymap_layout_get_name (model->xkb_keymap, 0);
 }
