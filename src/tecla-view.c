@@ -53,6 +53,7 @@ enum
 	PROP_0,
 	PROP_MODEL,
 	PROP_LEVEL,
+	PROP_NUM_LEVELS,
 	N_PROPS,
 };
 
@@ -98,6 +99,9 @@ tecla_view_get_property (GObject    *object,
 		break;
 	case PROP_LEVEL:
 		g_value_set_int (value, view->level);
+		break;
+	case PROP_NUM_LEVELS:
+		g_value_set_int (value, tecla_view_get_num_levels (view));
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -309,6 +313,12 @@ tecla_view_class_init (TeclaViewClass *klass)
 				  "Level",
 				  0, G_MAXINT, 0,
 				  G_PARAM_READABLE);
+	props[PROP_NUM_LEVELS] =
+		g_param_spec_int ("num-levels",
+				  "Number of levels",
+				  "Number of levels",
+				  0, G_MAXINT, 0,
+				  G_PARAM_READABLE);
 
 	g_object_class_install_properties (object_class, N_PROPS, props);
 
@@ -450,6 +460,7 @@ tecla_view_set_model (TeclaView  *view,
 	}
 
 	update_view (view);
+	g_object_notify (G_OBJECT (view), "num-levels");
 	g_object_notify (G_OBJECT (view), "level");
 }
 
@@ -457,4 +468,15 @@ int
 tecla_view_get_current_level (TeclaView *view)
 {
 	return view->level;
+}
+
+int
+tecla_view_get_num_levels (TeclaView *view)
+{
+	if (view->level2_keys && view->level3_keys)
+		return 4;
+	else if (view->level3_keys || view->level2_keys)
+		return 2;
+	else
+		return 1;
 }
