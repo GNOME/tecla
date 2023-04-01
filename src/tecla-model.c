@@ -338,18 +338,32 @@ tecla_model_get_key_label (TeclaModel  *model,
 			   const gchar *key)
 {
 	xkb_keycode_t keycode;
-	const xkb_keysym_t *syms;
-	int n_syms;
+	guint keysym;
 
 	keycode = xkb_keymap_key_by_name (model->xkb_keymap, key);
+	keysym = tecla_model_get_keyval (model, model->level, keycode);
+
+	if (keysym == 0)
+		return NULL;
+
+	return get_key_label (keysym);
+}
+
+guint
+tecla_model_get_keyval (TeclaModel    *model,
+			int            level,
+			xkb_keycode_t  keycode)
+{
+	const xkb_keysym_t *syms;
+	int n_syms;
 
 	n_syms = xkb_keymap_key_get_syms_by_level (model->xkb_keymap,
 						   keycode,
 						   0,
-						   model->level,
+						   level,
 						   &syms);
 	if (n_syms == 0)
-		return NULL;
+		return 0;
 
-	return get_key_label (syms[0]);
+	return syms[0];
 }
