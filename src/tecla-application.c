@@ -23,6 +23,7 @@
 #include "tecla-model.h"
 #include "tecla-view.h"
 
+#include <glib/gi18n.h>
 #include <stdlib.h>
 
 struct _TeclaApplication
@@ -114,6 +115,17 @@ num_levels_notify_cb (TeclaView  *view,
 	}
 }
 
+static void
+update_title (GtkWindow  *window,
+	      TeclaModel *model)
+{
+	g_autofree gchar *title = NULL;
+
+	title = g_strdup_printf ("%s ‐ %s", _("Keyboard Layout"),
+				 tecla_model_get_name (model));
+	gtk_window_set_title (GTK_WINDOW (window), title);
+}
+
 static GtkWindow *
 create_window (TeclaApplication  *app,
 	       TeclaView        **view_out)
@@ -134,7 +146,6 @@ create_window (TeclaApplication  *app,
 	view = TECLA_VIEW (gtk_builder_get_object (builder, "view"));
 	levels = GTK_BOX (gtk_builder_get_object (builder, "levels"));
 	gtk_application_add_window (GTK_APPLICATION (app), window);
-	//gtk_window_set_title (GTK_WINDOW (window), "Keyboard Layout");
 
 	g_signal_connect (view, "notify::num-levels",
 			  G_CALLBACK (num_levels_notify_cb), levels);
@@ -157,13 +168,26 @@ level_notify_cb (TeclaView  *view,
 }
 
 static void
-connect_model (TeclaView *view,
+name_notify_cb (TeclaModel *model,
+		GParamSpec *pspec,
+		GtkWindow  *window)
+{
+	update_title (window, model);
+}
+
+static void
+connect_model (GtkWindow  *window,
+	       TeclaView  *view,
 	       TeclaModel *model)
 {
 	tecla_view_set_model (view, model);
 	g_signal_connect_object (view, "notify::level",
 				 G_CALLBACK (level_notify_cb),
 				 model, 0);
+
+	g_signal_connect_object (model, "notify::name",
+				 G_CALLBACK (name_notify_cb),
+				 window, 0);
 }
 
 static void
@@ -178,8 +202,9 @@ tecla_application_activate (GApplication *app)
 
 		window = create_window (tecla_app, &view);
 		model = tecla_model_new_from_layout_name (tecla_app->layout);
-		connect_model (view, model);
+		connect_model (window, view, model);
 		g_clear_pointer (&tecla_app->layout, g_free);
+		update_title (window, model);
 
 		gtk_window_present (window);
 	} else {
@@ -187,7 +212,9 @@ tecla_application_activate (GApplication *app)
 			tecla_app->main_window =
 				create_window (tecla_app, &tecla_app->main_view);
 			model = tecla_model_new_from_layout_name ("us");
-			connect_model (tecla_app->main_view, model);
+			connect_model (tecla_app->main_window,
+				       tecla_app->main_view, model);
+			update_title (tecla_app->main_window, model);
 		}
 
 		gtk_window_present (tecla_app->main_window);
