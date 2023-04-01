@@ -56,12 +56,72 @@ tecla_application_command_line (GApplication            *app,
 	return EXIT_SUCCESS;
 }
 
+static void
+level_clicked_cb (GtkButton *button,
+		  TeclaView *view)
+{
+	int level;
+
+	level = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (button), "level"));
+	tecla_view_set_current_level (view, level);
+}
+
+static void
+view_level_notify_cb (TeclaView  *view,
+		      GParamSpec *pspec,
+		      GtkButton  *button)
+{
+	int level, toggle_level;
+
+	level = tecla_view_get_current_level (view);
+	toggle_level = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (button), "level"));
+
+	if (level == toggle_level)
+		gtk_widget_set_state_flags (GTK_WIDGET (button), GTK_STATE_FLAG_CHECKED, FALSE);
+	else
+		gtk_widget_unset_state_flags (GTK_WIDGET (button), GTK_STATE_FLAG_CHECKED);
+}
+
+static void
+num_levels_notify_cb (TeclaView  *view,
+		      GParamSpec *pspec,
+		      GtkBox     *levels)
+{
+	int num_levels, i;
+	GtkWidget *child;
+
+	while ((child = gtk_widget_get_first_child (GTK_WIDGET (levels))) != NULL)
+		gtk_box_remove (levels, child);
+
+	num_levels = tecla_view_get_num_levels (view);
+
+	for (i = 0; i < num_levels; i++) {
+		GtkWidget *button;
+		g_autofree char *label = g_strdup_printf ("%d", i + 1);
+
+		button = gtk_button_new_with_label (label);
+		gtk_widget_add_css_class (button, "toggle");
+		gtk_widget_add_css_class (button, "pill");
+		gtk_widget_set_focusable (button, FALSE);
+		gtk_box_append (levels, button);
+		g_object_set_data (G_OBJECT (button), "level",
+				   GINT_TO_POINTER (i));
+
+		g_signal_connect (button, "clicked",
+				  G_CALLBACK (level_clicked_cb), view);
+		g_signal_connect (view, "notify::level",
+				  G_CALLBACK (view_level_notify_cb), button);
+	}
+}
+
 static GtkWindow *
 create_window (TeclaApplication  *app,
-	       TeclaView        **view)
+	       TeclaView        **view_out)
 {
 	g_autoptr (GtkBuilder) builder = NULL;
+	TeclaView *view;
 	GtkWindow *window;
+	GtkBox *levels;
 
 	g_type_ensure (TECLA_TYPE_VIEW);
 
@@ -71,11 +131,16 @@ create_window (TeclaApplication  *app,
 				       NULL);
 
 	window = GTK_WINDOW (gtk_builder_get_object (builder, "window"));
+	view = TECLA_VIEW (gtk_builder_get_object (builder, "view"));
+	levels = GTK_BOX (gtk_builder_get_object (builder, "levels"));
 	gtk_application_add_window (GTK_APPLICATION (app), window);
 	//gtk_window_set_title (GTK_WINDOW (window), "Keyboard Layout");
 
-	if (view)
-		*view = TECLA_VIEW (gtk_builder_get_object (builder, "view"));
+	g_signal_connect (view, "notify::num-levels",
+			  G_CALLBACK (num_levels_notify_cb), levels);
+
+	if (view_out)
+		*view_out = view;
 
 	return window;
 }
