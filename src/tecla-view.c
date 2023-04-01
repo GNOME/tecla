@@ -26,6 +26,12 @@
 #include "pc105.h"
 #include "tecla-key.h"
 
+enum
+{
+	LEVEL2_PRESSED = 1 << 0,
+	LEVEL3_PRESSED = 1 << 1,
+};
+
 struct _TeclaView
 {
 	GtkWidget parent_instance;
@@ -36,6 +42,7 @@ struct _TeclaView
 
 	GList *level2_keys;
 	GList *level3_keys;
+	guint toggled_levels;
 };
 
 G_DEFINE_TYPE (TeclaView, tecla_view, GTK_TYPE_WIDGET)
@@ -107,6 +114,47 @@ tecla_view_finalize (GObject *object)
 }
 
 static void
+update_toggled_key_list (TeclaView *view,
+			 GList     *keys,
+			 guint      flag)
+{
+	GList *l;
+
+	for (l = keys; l; l = l->next) {
+		GtkWidget *key;
+
+		key = g_hash_table_lookup (view->keys_by_name, l->data);
+
+		if ((view->toggled_levels & flag) != 0)
+			gtk_widget_set_state_flags (key, GTK_STATE_FLAG_SELECTED, FALSE);
+		else
+			gtk_widget_unset_state_flags (key, GTK_STATE_FLAG_SELECTED);
+	}
+}
+
+static void
+update_toggled_keys (TeclaView   *view,
+		     const gchar *pressed_key_name)
+{
+	const gchar *name = pressed_key_name;
+
+	if (g_list_find_custom (view->level2_keys, name, (GCompareFunc) g_strcmp0)) {
+		if ((view->toggled_levels & LEVEL2_PRESSED) != 0)
+			view->toggled_levels &= ~LEVEL2_PRESSED;
+		else
+			view->toggled_levels |= LEVEL2_PRESSED;
+	} else if (g_list_find_custom (view->level3_keys, name, (GCompareFunc) g_strcmp0)) {
+		if ((view->toggled_levels & LEVEL3_PRESSED) != 0)
+			view->toggled_levels &= ~LEVEL3_PRESSED;
+		else
+			view->toggled_levels |= LEVEL3_PRESSED;
+	}
+
+	update_toggled_key_list (view, view->level2_keys, LEVEL2_PRESSED);
+	update_toggled_key_list (view, view->level3_keys, LEVEL3_PRESSED);
+}
+
+static void
 bind_state (GtkWidget     *w1,
 	    GtkStateFlags  old_flags,
 	    GtkWidget     *w2)
@@ -137,6 +185,8 @@ key_activated_cb (TeclaKey  *key,
 
 	name = tecla_key_get_name (key);
 	g_signal_emit (view, signals[KEY_ACTIVATED], 0, name);
+
+	update_toggled_keys (view, name);
 }
 
 static void
@@ -250,6 +300,8 @@ key_pressed_cb (GtkEventControllerKey *controller,
 		gtk_widget_set_state_flags (key, GTK_STATE_FLAG_ACTIVE, FALSE);
 
 	g_signal_emit (view, signals[KEY_ACTIVATED], 0, name);
+
+	update_toggled_keys (view, name);
 }
 
 static void
@@ -346,6 +398,10 @@ tecla_view_set_model (TeclaView  *view,
 	}
 
 	if (view->model) {
+		view->toggled_levels = 0;
+		update_toggled_key_list (view, view->level2_keys, LEVEL2_PRESSED);
+		update_toggled_key_list (view, view->level3_keys, LEVEL3_PRESSED);
+
 		g_clear_list (&view->level2_keys, NULL);
 		g_clear_list (&view->level3_keys, NULL);
 	}
