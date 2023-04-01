@@ -33,6 +33,9 @@ struct _TeclaView
 	GHashTable *keys_by_name;
 	TeclaModel *model;
 	guint model_changed_id;
+
+	GList *level2_keys;
+	GList *level3_keys;
 };
 
 G_DEFINE_TYPE (TeclaView, tecla_view, GTK_TYPE_WIDGET)
@@ -96,6 +99,8 @@ tecla_view_finalize (GObject *object)
 	TeclaView *view = TECLA_VIEW (object);
 
 	g_hash_table_unref (view->keys_by_name);
+	g_clear_list (&view->level2_keys, NULL);
+	g_clear_list (&view->level3_keys, NULL);
 	gtk_widget_unparent (gtk_widget_get_first_child (GTK_WIDGET (view)));
 
 	G_OBJECT_CLASS (tecla_view_parent_class)->finalize (object);
@@ -283,15 +288,28 @@ tecla_view_init (TeclaView *view)
 }
 
 static void
-update_from_model_foreach (const gchar *label,
+update_from_model_foreach (const gchar *name,
 			   TeclaKey    *key,
 			   TeclaView   *view)
 {
+	xkb_keycode_t keycode;
 	gchar *action;
+	guint keyval;
 
-	action = tecla_model_get_key_label (view->model, label);
+	action = tecla_model_get_key_label (view->model, name);
 	tecla_key_set_label (key, action);
 	g_free (action);
+
+	keycode = tecla_model_get_key_keycode (view->model, name);
+	keyval = tecla_model_get_keyval (view->model, 0, keycode);
+
+	if ((keyval == GDK_KEY_Shift_L || keyval == GDK_KEY_Shift_R) &&
+	    !g_list_find_custom (view->level2_keys, name, (GCompareFunc) g_strcmp0))
+		view->level2_keys = g_list_prepend (view->level2_keys, (gpointer) name);
+
+	if (keyval == GDK_KEY_ISO_Level3_Shift &&
+	    !g_list_find_custom (view->level3_keys, name, (GCompareFunc) g_strcmp0))
+		view->level3_keys = g_list_prepend (view->level3_keys, (gpointer) name);
 }
 
 static void
@@ -319,13 +337,20 @@ void
 tecla_view_set_model (TeclaView  *view,
 		      TeclaModel *model)
 {
+	if (view->model == model)
+		return;
+
 	if (view->model_changed_id) {
 		g_signal_handler_disconnect (view->model, view->model_changed_id);
 		view->model_changed_id = 0;
 	}
 
-	if (!g_set_object (&view->model, model))
-		return;
+	if (view->model) {
+		g_clear_list (&view->level2_keys, NULL);
+		g_clear_list (&view->level3_keys, NULL);
+	}
+
+	g_set_object (&view->model, model);
 
 	if (view->model) {
 		view->model_changed_id =
