@@ -20,6 +20,8 @@
 
 #include "tecla-model.h"
 
+#include "tecla-util.h"
+
 struct _TeclaModel
 {
 	GObject parent_instance;
@@ -294,36 +296,6 @@ tecla_model_new_from_xkb_keymap (struct xkb_keymap *xkb_keymap)
 	return model;
 }
 
-static struct xkb_context *
-create_xkb_context (void)
-{
-  struct xkb_context *ctx;
-  char xdg[PATH_MAX] = {0};
-  const char *env;
-
-  /*
-   * We can only append search paths in libxkbcommon, so we start with an
-   * empty set, then add the XDG dir, then add the default search paths.
-   */
-  ctx = xkb_context_new (XKB_CONTEXT_NO_DEFAULT_INCLUDES);
-
-  if ((env = g_getenv ("XDG_CONFIG_HOME")))
-    {
-      g_snprintf (xdg, sizeof xdg, "%s/xkb", env);
-    }
-  else if ((env = g_getenv ("HOME")))
-    {
-      g_snprintf (xdg, sizeof xdg, "%s/.config/xkb", env);
-    }
-
-  if (env)
-    xkb_context_include_path_append (ctx, xdg);
-
-  xkb_context_include_path_append_default (ctx);
-
-  return ctx;
-}
-
 TeclaModel *
 tecla_model_new_from_layout_name (const gchar *layout)
 {
@@ -336,7 +308,7 @@ tecla_model_new_from_layout_name (const gchar *layout)
 		.layout = layout,
 	};
 
-	xkb_context = create_xkb_context ();
+	xkb_context = tecla_util_create_xkb_context ();
 	xkb_keymap = xkb_keymap_new_from_names (xkb_context, &names, 0);
 	xkb_context_unref (xkb_context);
 

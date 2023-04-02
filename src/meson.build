@@ -11,6 +11,7 @@ source = [
     'tecla-application.c',
     'tecla-key.c',
     'tecla-model.c',
+    'tecla-util.c',
     'tecla-view.c',
     'main.c',
     tecla_gresources,
