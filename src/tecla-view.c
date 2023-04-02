@@ -393,23 +393,28 @@ update_from_model_foreach (const gchar *name,
 			   TeclaView   *view)
 {
 	xkb_keycode_t keycode;
-	gchar *action;
+	g_autofree gchar *action = NULL;
 	guint keyval;
-
-	action = tecla_model_get_key_label (view->model, view->level, name);
-	tecla_key_set_label (key, action);
-	g_free (action);
 
 	keycode = tecla_model_get_key_keycode (view->model, name);
 	keyval = tecla_model_get_keyval (view->model, 0, keycode);
 
-	if ((keyval == GDK_KEY_Shift_L || keyval == GDK_KEY_Shift_R) &&
-	    !g_list_find_custom (view->level2_keys, name, (GCompareFunc) g_strcmp0))
-		view->level2_keys = g_list_prepend (view->level2_keys, (gpointer) name);
+	if (keyval == GDK_KEY_Shift_L || keyval == GDK_KEY_Shift_R) {
+		if (!g_list_find_custom (view->level2_keys, name, (GCompareFunc) g_strcmp0))
+			view->level2_keys = g_list_prepend (view->level2_keys, (gpointer) name);
+		action = g_strdup ("⬆");
+	}
 
-	if (keyval == GDK_KEY_ISO_Level3_Shift &&
-	    !g_list_find_custom (view->level3_keys, name, (GCompareFunc) g_strcmp0))
-		view->level3_keys = g_list_prepend (view->level3_keys, (gpointer) name);
+	if (keyval == GDK_KEY_ISO_Level3_Shift) {
+		if (!g_list_find_custom (view->level3_keys, name, (GCompareFunc) g_strcmp0))
+			view->level3_keys = g_list_prepend (view->level3_keys, (gpointer) name);
+		action = g_strdup ("⎇");
+	}
+
+	if (!action)
+		action = tecla_model_get_key_label (view->model, view->level, name);
+
+	tecla_key_set_label (key, action);
 }
 
 static void
