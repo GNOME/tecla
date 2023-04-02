@@ -24,7 +24,6 @@ struct _TeclaModel
 {
 	GObject parent_instance;
 	struct xkb_keymap *xkb_keymap;
-	int level;
 };
 
 enum
@@ -344,17 +343,6 @@ tecla_model_new_from_layout_name (const gchar *layout)
 	xkb_keymap_unref (xkb_keymap);
 
 	return model;
-}
-
-void
-tecla_model_set_level (TeclaModel *model,
-		       int         level)
-{
-	if (model->level == level)
-		return;
-
-	model->level = level;
-	g_signal_emit (model, signals[CHANGED], 0);
 }
 
 const gchar *

@@ -30,9 +30,6 @@ TeclaModel * tecla_model_new_from_xkb_keymap (struct xkb_keymap *xkb_keymap);
 
 TeclaModel * tecla_model_new_from_layout_name (const gchar *layout);
 
-void tecla_model_set_level (TeclaModel *model,
-			    int         level);
-
 const gchar * tecla_model_get_keycode_key (TeclaModel    *model,
 					   xkb_keycode_t  keycode);
 

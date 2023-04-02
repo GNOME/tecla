@@ -157,17 +157,6 @@ create_window (TeclaApplication  *app,
 }
 
 static void
-level_notify_cb (TeclaView  *view,
-		 GParamSpec *pspec,
-		 TeclaModel *model)
-{
-	int level;
-
-	level = tecla_view_get_current_level (view);
-	tecla_model_set_level (model, level);
-}
-
-static void
 name_notify_cb (TeclaModel *model,
 		GParamSpec *pspec,
 		GtkWindow  *window)
@@ -181,10 +170,6 @@ connect_model (GtkWindow  *window,
 	       TeclaModel *model)
 {
 	tecla_view_set_model (view, model);
-	g_signal_connect_object (view, "notify::level",
-				 G_CALLBACK (level_notify_cb),
-				 model, 0);
-
 	g_signal_connect_object (model, "notify::name",
 				 G_CALLBACK (name_notify_cb),
 				 window, 0);

@@ -67,6 +67,8 @@ enum
 
 static guint signals[N_SIGNALS] = { 0, };
 
+static void update_view (TeclaView *view);
+
 static void
 tecla_view_set_property (GObject      *object,
 			 guint         prop_id,
@@ -182,6 +184,7 @@ update_level (TeclaView *view)
 
 	view->level = level;
 	g_object_notify (G_OBJECT (view), "level");
+	update_view (view);
 }
 
 static void
@@ -426,7 +429,19 @@ static void
 model_changed_cb (TeclaModel *model,
 		  TeclaView  *view)
 {
+	view->toggled_levels = 0;
+	view->level = 0;
+	update_toggled_key_list (view, view->level2_keys, LEVEL2_PRESSED);
+	update_toggled_key_list (view, view->level3_keys, LEVEL3_PRESSED);
+	update_level (view);
+
+	g_clear_list (&view->level2_keys, NULL);
+	g_clear_list (&view->level3_keys, NULL);
+
 	update_view (view);
+
+	g_object_notify (G_OBJECT (view), "num-levels");
+	g_object_notify (G_OBJECT (view), "level");
 }
 
 void
@@ -441,16 +456,6 @@ tecla_view_set_model (TeclaView  *view,
 		view->model_changed_id = 0;
 	}
 
-	if (view->model) {
-		view->toggled_levels = 0;
-		update_toggled_key_list (view, view->level2_keys, LEVEL2_PRESSED);
-		update_toggled_key_list (view, view->level3_keys, LEVEL3_PRESSED);
-		update_level (view);
-
-		g_clear_list (&view->level2_keys, NULL);
-		g_clear_list (&view->level3_keys, NULL);
-	}
-
 	g_set_object (&view->model, model);
 
 	if (view->model) {
@@ -459,9 +464,7 @@ tecla_view_set_model (TeclaView  *view,
 					  G_CALLBACK (model_changed_cb), view);
 	}
 
-	update_view (view);
-	g_object_notify (G_OBJECT (view), "num-levels");
-	g_object_notify (G_OBJECT (view), "level");
+	model_changed_cb (model, view);
 }
 
 int
