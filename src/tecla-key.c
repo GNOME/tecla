@@ -205,6 +205,7 @@ tecla_key_init (TeclaKey *key)
 
 	gtk_widget_add_controller (GTK_WIDGET (key),
 				   GTK_EVENT_CONTROLLER (gesture));
+	gtk_widget_add_css_class (GTK_WIDGET (key), "opaque");
 }
 
 GtkWidget *
