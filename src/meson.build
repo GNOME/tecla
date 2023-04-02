@@ -10,6 +10,7 @@ tecla_gresources = gnome.compile_resources('tecla-gresources',
 source = [
     'tecla-application.c',
     'tecla-key.c',
+    'tecla-keymap-observer.c',
     'tecla-model.c',
     'tecla-util.c',
     'tecla-view.c',
@@ -19,6 +20,6 @@ source = [
 
 tecla = executable('tecla',
     sources: source,
-    dependencies: [gtk_dep, adw_dep, xkbcommon_dep, libm_dep],
+    dependencies: [gtk_dep, gtk_wayland_dep, wayland_dep, adw_dep, xkbcommon_dep, libm_dep],
     install: true,
 )

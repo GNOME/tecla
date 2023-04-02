@@ -21,6 +21,7 @@
 #include "tecla-application.h"
 
 #include "tecla-key.h"
+#include "tecla-keymap-observer.h"
 #include "tecla-model.h"
 #include "tecla-view.h"
 
@@ -39,6 +40,7 @@ struct _TeclaApplication
 	GtkWindow *main_window;
 	TeclaView *main_view;
 	TeclaModel *main_model;
+	TeclaKeymapObserver *observer;
 	gchar *layout;
 };
 
@@ -119,8 +121,8 @@ num_levels_notify_cb (TeclaView  *view,
 
 		g_signal_connect (button, "clicked",
 				  G_CALLBACK (level_clicked_cb), view);
-		g_signal_connect (view, "notify::level",
-				  G_CALLBACK (view_level_notify_cb), button);
+		g_signal_connect_object (view, "notify::level",
+					 G_CALLBACK (view_level_notify_cb), button, 0);
 	}
 }
 
@@ -318,6 +320,35 @@ connect_model (GtkWindow  *window,
 }
 
 static void
+observer_keymap_notify_cb (TeclaKeymapObserver *observer,
+			   GParamSpec          *pspec,
+			   TeclaApplication    *app)
+{
+	g_autoptr (TeclaModel) model = NULL;
+	struct xkb_keymap *xkb_keymap;
+
+	xkb_keymap = tecla_keymap_observer_get_keymap (observer);
+	model = tecla_model_new_from_xkb_keymap (xkb_keymap);
+	connect_model (app->main_window,
+		       app->main_view, model);
+	update_title (app->main_window, model);
+
+	g_set_object (&app->main_model, model);
+}
+
+static void
+observer_keymap_group_cb (TeclaKeymapObserver *observer,
+			  GParamSpec          *pspec,
+			  TeclaApplication    *app)
+{
+	int group;
+
+	group = tecla_keymap_observer_get_group (observer);
+	if (app->main_model)
+		tecla_model_set_group (app->main_model, group);
+}
+
+static void
 tecla_application_activate (GApplication *app)
 {
 	TeclaApplication *tecla_app = TECLA_APPLICATION (app);
@@ -338,10 +369,12 @@ tecla_application_activate (GApplication *app)
 		if (!tecla_app->main_window) {
 			tecla_app->main_window =
 				create_window (tecla_app, &tecla_app->main_view);
-			model = tecla_model_new_from_layout_name ("us");
-			connect_model (tecla_app->main_window,
-				       tecla_app->main_view, model);
-			update_title (tecla_app->main_window, model);
+
+			tecla_app->observer = tecla_keymap_observer_new ();
+			g_signal_connect (tecla_app->observer, "notify::keymap",
+					  G_CALLBACK (observer_keymap_notify_cb), app);
+			g_signal_connect (tecla_app->observer, "notify::group",
+					  G_CALLBACK (observer_keymap_group_cb), app);
 		}
 
 		gtk_window_present (tecla_app->main_window);
