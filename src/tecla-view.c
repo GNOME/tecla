@@ -392,7 +392,7 @@ update_from_model_foreach (const gchar *name,
 	gchar *action;
 	guint keyval;
 
-	action = tecla_model_get_key_label (view->model, name);
+	action = tecla_model_get_key_label (view->model, view->level, name);
 	tecla_key_set_label (key, action);
 	g_free (action);
 

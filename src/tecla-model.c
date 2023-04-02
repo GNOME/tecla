@@ -373,13 +373,14 @@ tecla_model_get_key_keycode (TeclaModel  *model,
 
 gchar *
 tecla_model_get_key_label (TeclaModel  *model,
+			   int          level,
 			   const gchar *key)
 {
 	xkb_keycode_t keycode;
 	guint keysym;
 
 	keycode = xkb_keymap_key_by_name (model->xkb_keymap, key);
-	keysym = tecla_model_get_keyval (model, model->level, keycode);
+	keysym = tecla_model_get_keyval (model, level, keycode);
 
 	if (keysym == 0)
 		return NULL;
