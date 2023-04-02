@@ -24,6 +24,7 @@ struct _TeclaModel
 {
 	GObject parent_instance;
 	struct xkb_keymap *xkb_keymap;
+	int group;
 };
 
 enum
@@ -386,7 +387,7 @@ tecla_model_get_keyval (TeclaModel    *model,
 
 	n_syms = xkb_keymap_key_get_syms_by_level (model->xkb_keymap,
 						   keycode,
-						   0,
+						   model->group,
 						   level,
 						   &syms);
 	if (n_syms == 0)
@@ -398,5 +399,14 @@ tecla_model_get_keyval (TeclaModel    *model,
 const gchar *
 tecla_model_get_name (TeclaModel *model)
 {
-	return xkb_keymap_layout_get_name (model->xkb_keymap, 0);
+	return xkb_keymap_layout_get_name (model->xkb_keymap, model->group);
+}
+
+void
+tecla_model_set_group (TeclaModel *model,
+		       int         group)
+{
+	model->group = group;
+	g_object_notify (G_OBJECT (model), "name");
+	g_signal_emit (model, signals[CHANGED], 0);
 }

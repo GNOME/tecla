@@ -45,3 +45,6 @@ guint tecla_model_get_keyval (TeclaModel    *model,
 			      xkb_keycode_t  keycode);
 
 const gchar * tecla_model_get_name (TeclaModel *model);
+
+void tecla_model_set_group (TeclaModel *model,
+			    int         group);
