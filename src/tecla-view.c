@@ -217,7 +217,7 @@ key_activated_cb (TeclaKey  *key,
 	const gchar *name;
 
 	name = tecla_key_get_name (key);
-	g_signal_emit (view, signals[KEY_ACTIVATED], 0, name);
+	g_signal_emit (view, signals[KEY_ACTIVATED], 0, name, key);
 
 	update_toggled_keys (view, name);
 	update_level (view);
@@ -301,7 +301,8 @@ tecla_view_class_init (TeclaViewClass *klass)
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
 			      0, NULL, NULL, NULL,
-			      G_TYPE_NONE, 1, G_TYPE_STRING);
+			      G_TYPE_NONE,
+			      2, G_TYPE_STRING, GTK_TYPE_WIDGET);
 
 	props[PROP_MODEL] =
 		g_param_spec_object ("model",
@@ -345,8 +346,6 @@ key_pressed_cb (GtkEventControllerKey *controller,
 	if (key)
 		gtk_widget_set_state_flags (key, GTK_STATE_FLAG_ACTIVE, FALSE);
 
-	g_signal_emit (view, signals[KEY_ACTIVATED], 0, name);
-
 	update_toggled_keys (view, name);
 	update_level (view);
 }
@@ -366,6 +365,8 @@ key_released_cb (GtkEventControllerKey *controller,
 
 	if (key)
 		gtk_widget_unset_state_flags (key, GTK_STATE_FLAG_ACTIVE);
+
+	g_signal_emit (view, signals[KEY_ACTIVATED], 0, name, key);
 }
 
 static void

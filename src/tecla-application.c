@@ -20,11 +20,18 @@
 
 #include "tecla-application.h"
 
+#include "tecla-key.h"
 #include "tecla-model.h"
 #include "tecla-view.h"
 
 #include <glib/gi18n.h>
 #include <stdlib.h>
+
+typedef struct
+{
+	int level;
+	guint keyval;
+} KeyInfo;
 
 struct _TeclaApplication
 {
@@ -34,6 +41,8 @@ struct _TeclaApplication
 	TeclaModel *main_model;
 	gchar *layout;
 };
+
+static GtkPopover *current_popover = NULL;
 
 G_DEFINE_TYPE (TeclaApplication, tecla_application, GTK_TYPE_APPLICATION)
 
@@ -164,6 +173,135 @@ name_notify_cb (TeclaModel *model,
 	update_title (window, model);
 }
 
+static gboolean
+unparent_popover (GtkWidget *popover)
+{
+	gtk_widget_unparent (popover);
+	return G_SOURCE_REMOVE;
+}
+
+static void
+popover_closed_cb (GtkPopover *popover,
+		   TeclaView  *view)
+{
+	GtkWidget *parent;
+
+	if (current_popover == popover)
+		current_popover = NULL;
+
+	parent = gtk_widget_get_parent (GTK_WIDGET (popover));
+	gtk_widget_unset_state_flags (parent, GTK_STATE_FLAG_ACTIVE);
+
+	g_idle_add ((GSourceFunc) unparent_popover, popover);
+}
+
+static GtkPopover *
+create_popover (TeclaView   *view,
+		TeclaModel  *model,
+		GtkWidget   *widget,
+		const gchar *name)
+{
+	int n_levels, i;
+	xkb_keycode_t keycode;
+	GtkPopover *popover;
+	GtkWidget *box;
+	g_autoptr (GArray) key_info = NULL;
+
+	keycode = tecla_model_get_key_keycode (model, name);
+	n_levels = tecla_view_get_num_levels (view);
+
+	key_info = g_array_new (FALSE, TRUE, sizeof (KeyInfo));
+
+	for (i = 0; i < n_levels; i++) {
+		KeyInfo info;
+
+		info.level = i;
+		info.keyval = tecla_model_get_keyval (model,
+						      info.level,
+						      keycode);
+		if (info.keyval == 0)
+			continue;
+
+		g_array_append_val (key_info, info);
+	}
+
+	if (key_info->len < 2)
+		return NULL;
+
+	box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+	gtk_widget_set_margin_start (box, 12);
+	gtk_widget_set_margin_end (box, 12);
+	gtk_widget_set_margin_top (box, 12);
+	gtk_widget_set_margin_bottom (box, 12);
+
+	for (i = 0; i < (int) key_info->len; i++) {
+		GtkWidget *hbox, *level, *etching, *desc;
+		KeyInfo *info;
+		g_autofree gchar *str;
+
+		info = &g_array_index (key_info, KeyInfo, i);
+
+		hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+
+		str = g_strdup_printf ("%d", info->level + 1);
+		level = gtk_label_new (str);
+		gtk_widget_add_css_class (level, "heading");
+		gtk_box_append (GTK_BOX (hbox), level);
+
+		str = tecla_model_get_key_label (model, info->level, name);
+		etching = tecla_key_new (NULL);
+		tecla_key_set_label (TECLA_KEY (etching), str);
+		gtk_widget_add_css_class (etching, "tecla-key");
+		gtk_widget_set_sensitive (etching, FALSE);
+		gtk_box_append (GTK_BOX (hbox), etching);
+
+		desc = gtk_label_new (gdk_keyval_name (info->keyval));
+		gtk_box_append (GTK_BOX (hbox), desc);
+
+		gtk_box_append (GTK_BOX (box), hbox);
+	}
+
+	popover = GTK_POPOVER (gtk_popover_new ());
+	gtk_popover_set_child (popover, box);
+
+	gtk_popover_set_autohide (popover, FALSE);
+	gtk_popover_set_position (popover, GTK_POS_TOP);
+	g_signal_connect_after (popover, "closed",
+			  G_CALLBACK (popover_closed_cb), view);
+
+	return popover;
+}
+
+static void
+key_activated_cb (TeclaView   *view,
+		  const gchar *name,
+		  GtkWidget   *widget,
+		  TeclaModel  *model)
+{
+	GtkPopover *popover;
+
+	if (current_popover) {
+		if (gtk_widget_get_parent (GTK_WIDGET (current_popover)) == widget) {
+			gtk_popover_popdown (current_popover);
+			return;
+		}
+
+		gtk_popover_popdown (current_popover);
+	}
+
+	if (!widget)
+		return;
+
+	popover = create_popover (view, model, widget, name);
+
+	if (popover) {
+		gtk_widget_set_parent (GTK_WIDGET (popover), widget);
+		gtk_widget_set_state_flags (widget, GTK_STATE_FLAG_ACTIVE, FALSE);
+		gtk_popover_popup (popover);
+		current_popover = popover;
+	}
+}
+
 static void
 connect_model (GtkWindow  *window,
 	       TeclaView  *view,
@@ -173,6 +311,10 @@ connect_model (GtkWindow  *window,
 	g_signal_connect_object (model, "notify::name",
 				 G_CALLBACK (name_notify_cb),
 				 window, 0);
+
+	g_signal_connect_object (view, "key-activated",
+				 G_CALLBACK (key_activated_cb),
+				 model, 0);
 }
 
 static void
