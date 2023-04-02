@@ -352,33 +352,29 @@ static void
 tecla_application_activate (GApplication *app)
 {
 	TeclaApplication *tecla_app = TECLA_APPLICATION (app);
-	g_autoptr (TeclaModel) model = NULL;
+
+	if (!tecla_app->main_window) {
+		tecla_app->main_window =
+			create_window (tecla_app, &tecla_app->main_view);
+
+		tecla_app->observer = tecla_keymap_observer_new ();
+		g_signal_connect (tecla_app->observer, "notify::keymap",
+				  G_CALLBACK (observer_keymap_notify_cb), app);
+		g_signal_connect (tecla_app->observer, "notify::group",
+				  G_CALLBACK (observer_keymap_group_cb), app);
+	}
 
 	if (tecla_app->layout) {
-		GtkWindow *window;
-		TeclaView *view;
-
-		window = create_window (tecla_app, &view);
-		model = tecla_model_new_from_layout_name (tecla_app->layout);
-		connect_model (window, view, model);
+		tecla_app->main_model =
+			tecla_model_new_from_layout_name (tecla_app->layout);
+		connect_model (tecla_app->main_window,
+			       tecla_app->main_view,
+			       tecla_app->main_model);
 		g_clear_pointer (&tecla_app->layout, g_free);
-		update_title (window, model);
-
-		gtk_window_present (window);
-	} else {
-		if (!tecla_app->main_window) {
-			tecla_app->main_window =
-				create_window (tecla_app, &tecla_app->main_view);
-
-			tecla_app->observer = tecla_keymap_observer_new ();
-			g_signal_connect (tecla_app->observer, "notify::keymap",
-					  G_CALLBACK (observer_keymap_notify_cb), app);
-			g_signal_connect (tecla_app->observer, "notify::group",
-					  G_CALLBACK (observer_keymap_group_cb), app);
-		}
-
-		gtk_window_present (tecla_app->main_window);
+		update_title (tecla_app->main_window, tecla_app->main_model);
 	}
+
+	gtk_window_present (tecla_app->main_window);
 }
 
 static void
