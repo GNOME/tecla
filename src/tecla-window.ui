@@ -29,5 +29,7 @@
         <property name="margin-bottom">18</property>
       </object>
     </child>
+    <property name="default-width">800</property>
+    <property name="default-height">400</property>
   </object>
 </interface>
