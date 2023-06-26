@@ -7,3 +7,5 @@ desktop_file = i18n.merge_file(
   install_dir: get_option('prefix') / get_option('datadir') / 'applications',
   type: 'desktop'
 )
+
+subdir('icons')

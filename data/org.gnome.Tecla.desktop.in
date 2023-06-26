@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Tecla
 Comment=Preview keyboard layouts
-Icon=preferences-desktop-keyboard
+Icon=org.gnome.Tecla
 Exec=tecla
 Terminal=false
 Type=Application
