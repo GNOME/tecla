@@ -24,7 +24,7 @@ i18n = import('i18n')
 gtk_dep = dependency('gtk4')
 gtk_wayland_dep = dependency('gtk4-wayland', required: false)
 wayland_dep = dependency('wayland-client', required: false)
-adw_dep = dependency('libadwaita-1')
+adw_dep = dependency('libadwaita-1', version: '>=1.4')
 xkbcommon_dep = dependency('xkbcommon')
 libm_dep = cc.find_library('m')
 
