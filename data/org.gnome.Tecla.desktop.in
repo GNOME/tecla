@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Tecla
+Comment=Preview keyboard layouts
+Icon=preferences-desktop-keyboard
+Exec=tecla
+Terminal=false
+Type=Application
+StartupNotify=true
+NoDisplay=true
+Categories=GNOME;GTK;Core;System;
+OnlyShowIn=GNOME;

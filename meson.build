@@ -19,6 +19,7 @@ add_project_arguments(
 )
 
 gnome = import('gnome')
+i18n = import('i18n')
 
 gtk_dep = dependency('gtk4')
 gtk_wayland_dep = dependency('gtk4-wayland', required: false)
@@ -27,4 +28,5 @@ adw_dep = dependency('libadwaita-1')
 xkbcommon_dep = dependency('xkbcommon')
 libm_dep = cc.find_library('m')
 
+subdir('data')
 subdir('src')
