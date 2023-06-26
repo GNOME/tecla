@@ -1,0 +1,24 @@
+<Project xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/"
+         xmlns:gnome="http://api.gnome.org/doap-extensions#"
+         xmlns="http://usefulinc.com/ns/doap#">
+
+  <name xml:lang="en">Tecla</name>
+  <shortdesc xml:lang="en">A keymap viewer</shortdesc>
+  <description>Tecla is a keyboard layout viewer</description>
+  <homepage rdf:resource="https://gitlab.gnome.org/GNOME/tecla" />
+  <download-page rdf:resource="http://download.gnome.org/sources/tecla/" />
+  <bug-database rdf:resource="https://gitlab.gnome.org/GNOME/tecla/issues" />
+
+  <category rdf:resource="http://api.gnome.org/doap-extensions#apps" />
+  <programming-language>C</programming-language>
+
+  <maintainer>
+    <foaf:Person>
+      <foaf:name>Carlos Garnacho</foaf:name>
+      <foaf:mbox rdf:resource="mailto:carlosg@gnome.org" />
+      <gnome:userid>carlosg</gnome:userid>
+    </foaf:Person>
+  </maintainer>
+</Project>
