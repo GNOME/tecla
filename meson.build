@@ -1,5 +1,5 @@
 project('tecla', 'c',
-    version: '0.1.alpha',
+    version: '45.alpha',
     meson_version: '>=0.53',
     default_options: [
         'c_std=c99',
