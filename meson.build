@@ -30,3 +30,4 @@ libm_dep = cc.find_library('m')
 
 subdir('data')
 subdir('src')
+subdir('po')
