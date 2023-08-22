@@ -1,6 +1,6 @@
 project('tecla', 'c',
     version: '45.beta',
-    meson_version: '>=0.53',
+    meson_version: '>=0.54',
     default_options: [
         'c_std=c99',
         'warning_level=2',
@@ -20,6 +20,7 @@ add_project_arguments(
 
 gnome = import('gnome')
 i18n = import('i18n')
+pkg = import('pkgconfig')
 
 gtk_dep = dependency('gtk4')
 gtk_wayland_dep = dependency('gtk4-wayland', required: false)
@@ -31,3 +32,13 @@ libm_dep = cc.find_library('m')
 subdir('data')
 subdir('src')
 subdir('po')
+
+pkg.generate(
+    name: 'tecla',
+    description: 'Keyboard layout previewer',
+    dataonly: true,
+    variables: [
+        'prefix=' + get_option('prefix'),
+        'app=${prefix}' / get_option('bindir') / 'tecla',
+    ]
+)
