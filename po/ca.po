@@ -1,0 +1,30 @@
+# Catalan translation for tecla.
+# Copyright (C) 2023 tecla's COPYRIGHT HOLDER
+# This file is distributed under the same license as the tecla package.
+# pocsenderi <pocsenderi@protonmail.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tecla main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/-/issues\n"
+"POT-Creation-Date: 2023-08-22 23:37+0000\n"
+"PO-Revision-Date: 2023-08-23 17:25+0200\n"
+"Language-Team: Catalan <gnome@llistes.softcatala.org>\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: \n"
+"X-Generator: Poedit 2.4.2\n"
+
+#: data/org.gnome.Tecla.desktop.in:3
+msgid "Tecla"
+msgstr "Tecla"
+
+#: data/org.gnome.Tecla.desktop.in:4
+msgid "Preview keyboard layouts"
+msgstr "Vista prèvia de les disposicions de teclat"
+
+#: src/tecla-application.c:135
+msgid "Keyboard Layout"
+msgstr "Disposició del teclat"
