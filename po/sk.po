@@ -1,0 +1,31 @@
+# Slovak translation for tecla.
+# Copyright (C) 2023 tecla's COPYRIGHT HOLDER
+# This file is distributed under the same license as the tecla package.
+# Dušan Kazik <prescott66@gmail.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tecla main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/-/issues\n"
+"POT-Creation-Date: 2023-08-28 20:43+0000\n"
+"PO-Revision-Date: 2023-08-30 14:03+0200\n"
+"Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
+"Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
+"X-Generator: Poedit 3.3.2\n"
+
+#: data/org.gnome.Tecla.desktop.in:3
+msgid "Tecla"
+msgstr "Tecla"
+
+#: data/org.gnome.Tecla.desktop.in:4
+msgid "Preview keyboard layouts"
+msgstr "Zobrazuje náhľady rozložení klávesníc"
+
+#: src/tecla-application.c:135
+msgid "Keyboard Layout"
+msgstr "Rozloženie klávesnice"
