@@ -297,19 +297,32 @@ tecla_model_new_from_xkb_keymap (struct xkb_keymap *xkb_keymap)
 }
 
 TeclaModel *
-tecla_model_new_from_layout_name (const gchar *layout)
+tecla_model_new_from_layout_name (const gchar *name)
 {
 	TeclaModel *model;
 	struct xkb_context *xkb_context;
 	struct xkb_keymap *xkb_keymap;
-	struct xkb_rule_names names = {
+	g_autofree gchar *layout = NULL;
+	const gchar *variant = NULL, *sep;
+	struct xkb_rule_names rule_names = {
 		.rules = "evdev",
 		.model = "pc105",
-		.layout = layout,
 	};
 
+	sep = strchr (name, '+');
+
+	if (sep) {
+		variant = sep + 1;
+		layout = g_strndup (name, sep - name);
+	} else {
+		layout = g_strdup (name);
+	}
+
+	rule_names.layout = layout;
+	rule_names.variant = variant;
+
 	xkb_context = tecla_util_create_xkb_context ();
-	xkb_keymap = xkb_keymap_new_from_names (xkb_context, &names, 0);
+	xkb_keymap = xkb_keymap_new_from_names (xkb_context, &rule_names, 0);
 	xkb_context_unref (xkb_context);
 
 	model = tecla_model_new_from_xkb_keymap (xkb_keymap);
