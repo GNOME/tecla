@@ -26,7 +26,7 @@ struct xkb_context *
 tecla_util_create_xkb_context (void)
 {
   struct xkb_context *ctx;
-  char xdg[PATH_MAX] = {0};
+  char xdg[1024] = {0};
   const char *env;
 
   /*
