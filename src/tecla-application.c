@@ -42,6 +42,7 @@ struct _TeclaApplication
 	TeclaModel *main_model;
 	TeclaKeymapObserver *observer;
 	gchar *layout;
+	gboolean ignore_first_change;
 };
 
 static GtkPopover *current_popover = NULL;
@@ -327,6 +328,11 @@ observer_keymap_notify_cb (TeclaKeymapObserver *observer,
 	g_autoptr (TeclaModel) model = NULL;
 	struct xkb_keymap *xkb_keymap;
 
+	if (app->ignore_first_change) {
+		app->ignore_first_change = FALSE;
+		return;
+	}
+
 	xkb_keymap = tecla_keymap_observer_get_keymap (observer);
 	model = tecla_model_new_from_xkb_keymap (xkb_keymap);
 	connect_model (app->main_window,
@@ -356,6 +362,8 @@ tecla_application_activate (GApplication *app)
 	if (!tecla_app->main_window) {
 		tecla_app->main_window =
 			create_window (tecla_app, &tecla_app->main_view);
+
+		tecla_app->ignore_first_change = tecla_app->layout != NULL;
 
 		tecla_app->observer = tecla_keymap_observer_new ();
 		g_signal_connect (tecla_app->observer, "notify::keymap",
