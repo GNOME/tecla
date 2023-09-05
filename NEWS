@@ -1,3 +1,14 @@
+NEW in 45.rc
+============
+- Handle 105 key layouts
+- Handle keymap variants in commandline arguments
+- Fix overeager keymap listener overriding commandline
+  arguments.
+- Build fixes for NixOS
+- Add .pc file for build-time detection
+- Fix included license
+- Translation updates
+
 NEW in 45.beta
 ===============
 - Translation updates
