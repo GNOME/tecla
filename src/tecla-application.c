@@ -18,6 +18,7 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+#include "config.h"
 #include "tecla-application.h"
 
 #include "tecla-key.h"
@@ -67,6 +68,24 @@ tecla_application_command_line (GApplication            *app,
 	g_application_activate (app);
 
 	return EXIT_SUCCESS;
+}
+
+const GOptionEntry all_options[] = {
+	{ "version", 0, 0, G_OPTION_ARG_NONE, NULL, N_("Display version number"), NULL },
+	{ NULL, 0, 0, 0, NULL, NULL, NULL } /* end the list */
+};
+
+static int
+tecla_application_handle_local_options (GApplication *app,
+		      GVariantDict *options)
+{
+	if (g_variant_dict_contains (options, "version")) {
+		g_print ("%s %s\n", PACKAGE, VERSION);
+
+		return 0;
+	}
+
+	return -1;
 }
 
 static void
@@ -392,11 +411,13 @@ tecla_application_class_init (TeclaApplicationClass *klass)
 
 	application_class->command_line = tecla_application_command_line;
 	application_class->activate = tecla_application_activate;
+	application_class->handle_local_options = tecla_application_handle_local_options;
 }
 
 static void
 tecla_application_init (TeclaApplication *app)
 {
+	g_application_add_main_option_entries (G_APPLICATION (app), all_options);
 }
 
 GApplication *
