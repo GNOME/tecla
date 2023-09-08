@@ -1,0 +1,31 @@
+# Greek translation for tecla.
+# Copyright (C) 2023 tecla's COPYRIGHT HOLDER
+# This file is distributed under the same license as the tecla package.
+# Efstathios Iosifidis <eiosifidis@gnome.org>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tecla main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/-/issues\n"
+"POT-Creation-Date: 2023-09-07 16:52+0000\n"
+"PO-Revision-Date: 2023-09-09 02:18+0300\n"
+"Last-Translator: Efstathios Iosifidis <eiosifidis@gnome.org>\n"
+"Language-Team: Greek <gnome-el-list@gnome.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.3.2\n"
+
+#: data/org.gnome.Tecla.desktop.in:3
+msgid "Tecla"
+msgstr "Tecla"
+
+#: data/org.gnome.Tecla.desktop.in:4
+msgid "Preview keyboard layouts"
+msgstr "Προεπισκόπηση διατάξεων πληκτρολογίου"
+
+#: src/tecla-application.c:136
+msgid "Keyboard Layout"
+msgstr "Διάταξη πληκτρολογίου"
