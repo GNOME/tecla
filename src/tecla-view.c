@@ -229,6 +229,9 @@ construct_grid (TeclaView *view)
 	gulong i, j;
 	int anchor = 0;
 
+	/* make sure we show the keyboard layout in RTL same as in LTR */
+	gtk_widget_set_direction (view->grid, GTK_TEXT_DIR_LTR);
+
 	for (i = 0; i < G_N_ELEMENTS (pc105_layout.rows); i++) {
 		for (j = 0; j < G_N_ELEMENTS (pc105_layout.rows[i].keys); j++) {
 			TeclaLayoutKey *key;
