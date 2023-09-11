@@ -18,6 +18,27 @@ add_project_arguments(
     language: 'c'
 )
 
+config_h = configuration_data()
+config_defines = [
+  # package
+  ['PACKAGE', meson.project_name()],
+  ['PACKAGE_VERSION', meson.project_version()],
+  ['VERSION', meson.project_version()],
+  ['GETTEXT_PACKAGE', meson.project_name()],
+  ['LOCALEDIR', get_option('prefix') / get_option('localedir')],
+]
+
+foreach define: config_defines
+  config_h.set_quoted(define[0], define[1])
+endforeach
+
+configure_file(
+  output: 'config.h',
+  configuration: config_h
+)
+
+config_inc = include_directories('.')
+
 gnome = import('gnome')
 i18n = import('i18n')
 pkg = import('pkgconfig')

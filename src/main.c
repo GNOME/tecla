@@ -18,7 +18,11 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+#include "config.h"
+
 #include <libadwaita-1/adwaita.h>
+#include <locale.h>
+#include <glib/gi18n.h>
 
 #include "tecla-application.h"
 
@@ -27,6 +31,12 @@ main (int   argc,
       char *argv[])
 {
 	GApplication *app;
+
+	bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+	textdomain (GETTEXT_PACKAGE);
+
+	setlocale (LC_ALL, "");
 
 	adw_init ();
 	app = tecla_application_new ();
