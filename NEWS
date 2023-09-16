@@ -1,3 +1,10 @@
+NEW in 45.0
+===========
+- Added shortcuts to exit the dialog
+- Fix UI in RTL environments
+- Fix a11y initialization
+- Translation updates
+
 NEW in 45.rc
 ============
 - Handle 105 key layouts
