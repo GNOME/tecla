@@ -373,13 +373,17 @@ tecla_application_activate (GApplication *app)
 	}
 
 	if (tecla_app->layout) {
+		g_clear_object (&tecla_app->main_model);
 		tecla_app->main_model =
 			tecla_model_new_from_layout_name (tecla_app->layout);
-		connect_model (tecla_app->main_window,
-			       tecla_app->main_view,
-			       tecla_app->main_model);
-		g_clear_pointer (&tecla_app->layout, g_free);
-		update_title (tecla_app->main_window, tecla_app->main_model);
+
+		if (tecla_app->main_model) {
+			connect_model (tecla_app->main_window,
+				       tecla_app->main_view,
+				       tecla_app->main_model);
+			g_clear_pointer (&tecla_app->layout, g_free);
+			update_title (tecla_app->main_window, tecla_app->main_model);
+		}
 	}
 
 	gtk_window_present (tecla_app->main_window);

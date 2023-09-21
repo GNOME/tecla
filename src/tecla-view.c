@@ -343,6 +343,9 @@ key_pressed_cb (GtkEventControllerKey *controller,
 	const gchar *name;
 	GtkWidget *key;
 
+	if (!view->model)
+		return;
+
 	name = tecla_model_get_keycode_key (view->model, keycode);
 	key = g_hash_table_lookup (view->keys_by_name, name);
 
@@ -362,6 +365,9 @@ key_released_cb (GtkEventControllerKey *controller,
 {
 	const gchar *name;
 	GtkWidget *key;
+
+	if (!view->model)
+		return;
 
 	name = tecla_model_get_keycode_key (view->model, keycode);
 	key = g_hash_table_lookup (view->keys_by_name, name);

@@ -299,7 +299,7 @@ tecla_model_new_from_xkb_keymap (struct xkb_keymap *xkb_keymap)
 TeclaModel *
 tecla_model_new_from_layout_name (const gchar *name)
 {
-	TeclaModel *model;
+	TeclaModel *model = NULL;
 	struct xkb_context *xkb_context;
 	struct xkb_keymap *xkb_keymap;
 	g_autofree gchar *layout = NULL;
@@ -325,8 +325,10 @@ tecla_model_new_from_layout_name (const gchar *name)
 	xkb_keymap = xkb_keymap_new_from_names (xkb_context, &rule_names, 0);
 	xkb_context_unref (xkb_context);
 
-	model = tecla_model_new_from_xkb_keymap (xkb_keymap);
-	xkb_keymap_unref (xkb_keymap);
+	if (xkb_keymap) {
+		model = tecla_model_new_from_xkb_keymap (xkb_keymap);
+		xkb_keymap_unref (xkb_keymap);
+	}
 
 	return model;
 }
