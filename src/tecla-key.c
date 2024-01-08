@@ -120,6 +120,9 @@ tecla_key_snapshot (GtkWidget *widget,
 	pango_layout_get_pixel_extents (layout, NULL, &rect);
 	scale = MIN ((float) height / rect.height * 0.75, 3);
 
+	/* Snap scale to 1/4ths of logical pixels */
+	scale = roundf (scale * 4.0) / 4.0;
+
 	/* Ensure pixel exactness when placing the layout
 	 * centered and scaled on the widget, instead
 	 * of translate/scale/translate.
