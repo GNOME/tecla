@@ -1,3 +1,10 @@
+NEW in 46.alpha
+===============
+- Add --version command line option
+- Fix blurry keys
+- Fix crash on unknown keymap
+- Translation updates
+
 NEW in 45.0
 ===========
 - Added shortcuts to exit the dialog
