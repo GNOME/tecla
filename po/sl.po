@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/-/issues\n"
-"POT-Creation-Date: 2023-09-11 08:53+0000\n"
-"PO-Revision-Date: 2023-09-11 16:00+0200\n"
-"Last-Translator: Matej Urbančič <mateju@src.gnome.org>\n"
+"POT-Creation-Date: 2024-01-08 21:44+0000\n"
+"PO-Revision-Date: 2024-01-09 22:15+0100\n"
+"Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups."
 "com>\n"
 "Language: sl_SI\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: data/org.gnome.Tecla.desktop.in:3
 msgid "Tecla"
@@ -31,6 +31,10 @@ msgstr "Tekla"
 msgid "Preview keyboard layouts"
 msgstr "Pregled postavitev tipkovnice"
 
-#: src/tecla-application.c:136
+#: src/tecla-application.c:74
+msgid "Display version number"
+msgstr "Prikaži številko različice"
+
+#: src/tecla-application.c:155
 msgid "Keyboard Layout"
 msgstr "Postavitev tipkovnice"
