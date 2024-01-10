@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/-/issues\n"
-"POT-Creation-Date: 2023-08-17 19:29+0000\n"
-"PO-Revision-Date: 2023-10-10 11:22+0300\n"
+"POT-Creation-Date: 2024-01-08 21:44+0000\n"
+"PO-Revision-Date: 2024-01-10 10:55+0200\n"
 "Last-Translator: Florentina Mușat <florentina [dot] musat [dot] 28 [at] "
 "gmail [dot] com>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2);;\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #: data/org.gnome.Tecla.desktop.in:3
 msgid "Tecla"
@@ -28,6 +28,10 @@ msgstr "Tecla"
 msgid "Preview keyboard layouts"
 msgstr "Previzualizează aranjamente de tastatură"
 
-#: src/tecla-application.c:135
+#: src/tecla-application.c:74
+msgid "Display version number"
+msgstr "Afișează numărul versiunii"
+
+#: src/tecla-application.c:155
 msgid "Keyboard Layout"
 msgstr "Aranjament de tastatură"
