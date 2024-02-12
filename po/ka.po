@@ -1,14 +1,14 @@
 # Georgian translation for tecla.
 # Copyright (C) 2023 tecla's COPYRIGHT HOLDER
 # This file is distributed under the same license as the tecla package.
-# Ekaterine Papava <papava.e@gtu.ge>, 2023.
+# Ekaterine Papava <papava.e@gtu.ge>, 2023-2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/-/issues\n"
-"POT-Creation-Date: 2023-08-16 18:41+0000\n"
-"PO-Revision-Date: 2023-08-17 21:28+0200\n"
+"POT-Creation-Date: 2024-01-13 12:18+0000\n"
+"PO-Revision-Date: 2024-02-12 18:31+0100\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <ka@li.org>\n"
 "Language: ka\n"
@@ -25,6 +25,10 @@ msgstr "Tecla"
 msgid "Preview keyboard layouts"
 msgstr "კლავიატურის განლაგებების გადახედვა"
 
-#: src/tecla-application.c:135
+#: src/tecla-application.c:74
+msgid "Display version number"
+msgstr "ვერსიის ინფორმაციის ჩვენება"
+
+#: src/tecla-application.c:155
 msgid "Keyboard Layout"
 msgstr "კლავიატურის განლაგება"
