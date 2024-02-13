@@ -1,14 +1,14 @@
 # Swedish translation for tecla.
-# Copyright © 2023 tecla's COPYRIGHT HOLDER
+# Copyright © 2023, 2024 tecla's COPYRIGHT HOLDER
 # This file is distributed under the same license as the tecla package.
-# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2023.
+# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2023, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/-/issues\n"
-"POT-Creation-Date: 2023-08-10 14:56+0000\n"
-"PO-Revision-Date: 2023-08-10 17:54+0200\n"
+"POT-Creation-Date: 2024-01-08 21:44+0000\n"
+"PO-Revision-Date: 2024-01-09 05:55+0100\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: data/org.gnome.Tecla.desktop.in:3
 msgid "Tecla"
@@ -26,6 +26,10 @@ msgstr "Tecla"
 msgid "Preview keyboard layouts"
 msgstr "Förhandsvisa tangentbordslayouter"
 
-#: src/tecla-application.c:135
+#: src/tecla-application.c:74
+msgid "Display version number"
+msgstr "Visa versionsnummer"
+
+#: src/tecla-application.c:155
 msgid "Keyboard Layout"
 msgstr "Tangentbordslayout"
