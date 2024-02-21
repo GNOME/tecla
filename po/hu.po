@@ -1,14 +1,14 @@
 # Hungarian translation for tecla.
-# Copyright (C) 2023 Free Software Foundation, Inc.
+# Copyright (C) 2023, 2024 Free Software Foundation, Inc.
 # This file is distributed under the same license as the tecla package.
 #
-# Balázs Úr <ur.balazs at fsf dot hu>, 2023.
+# Balázs Úr <ur.balazs at fsf dot hu>, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/-/issues\n"
-"POT-Creation-Date: 2023-09-05 11:40+0000\n"
-"PO-Revision-Date: 2023-09-05 20:08+0200\n"
+"POT-Creation-Date: 2024-01-13 12:18+0000\n"
+"PO-Revision-Date: 2024-02-22 00:57+0200\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
@@ -26,6 +26,10 @@ msgstr "Tekla"
 msgid "Preview keyboard layouts"
 msgstr "Billentyűzetkiosztások előnézete"
 
-#: src/tecla-application.c:136
+#: src/tecla-application.c:74
+msgid "Display version number"
+msgstr "Verziószám megjelenítése"
+
+#: src/tecla-application.c:155
 msgid "Keyboard Layout"
 msgstr "Billentyűzetkiosztás"
