@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/-/issues\n"
-"POT-Creation-Date: 2023-08-30 15:51+0000\n"
-"PO-Revision-Date: 2023-09-01 08:57+0200\n"
+"POT-Creation-Date: 2024-01-13 12:18+0000\n"
+"PO-Revision-Date: 2024-02-28 15:32+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -26,6 +26,10 @@ msgstr "Tecla"
 msgid "Preview keyboard layouts"
 msgstr "Forhåndsvis tastaturlayout"
 
-#: src/tecla-application.c:135
+#: src/tecla-application.c:74
+msgid "Display version number"
+msgstr "Vis versionsnummer"
+
+#: src/tecla-application.c:155
 msgid "Keyboard Layout"
 msgstr "Tastaturlayout"
