@@ -1,14 +1,14 @@
 # Brazilian Portuguese translation for tecla.
 # Copyright (C) 2023 tecla's COPYRIGHT HOLDER
 # This file is distributed under the same license as the tecla package.
-# Rafael Fontenelle <rafaelff@gnome.org>, 2023.
+# Rafael Fontenelle <rafaelff@gnome.org>, 2023-2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/-/issues\n"
-"POT-Creation-Date: 2023-09-11 14:00+0000\n"
-"PO-Revision-Date: 2023-09-11 13:14-0300\n"
+"POT-Creation-Date: 2024-01-13 12:18+0000\n"
+"PO-Revision-Date: 2024-03-02 20:15-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <https://br.gnome.org/traducao>\n"
 "Language: pt_BR\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
-"X-Generator: Gtranslator 45.alpha0\n"
+"X-Generator: Gtranslator 45.3\n"
 
 #: data/org.gnome.Tecla.desktop.in:3
 msgid "Tecla"
@@ -26,6 +26,10 @@ msgstr "Tecla"
 msgid "Preview keyboard layouts"
 msgstr "Pré-visualize layouts de teclado"
 
-#: src/tecla-application.c:136
+#: src/tecla-application.c:74
+msgid "Display version number"
+msgstr "Exibe o número da versão"
+
+#: src/tecla-application.c:155
 msgid "Keyboard Layout"
 msgstr "Layout de teclado"
