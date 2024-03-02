@@ -1,15 +1,15 @@
 # Polish translation for tecla.
-# Copyright © 2023 the tecla authors.
+# Copyright © 2023-2024 the tecla authors.
 # This file is distributed under the same license as the tecla package.
-# Piotr Drąg <piotrdrag@gmail.com>, 2023.
-# Aviary.pl <community-poland@mozilla.org>, 2023.
+# Piotr Drąg <piotrdrag@gmail.com>, 2023-2024.
+# Aviary.pl <community-poland@mozilla.org>, 2023-2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tecla\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/-/issues\n"
-"POT-Creation-Date: 2023-08-10 14:51+0000\n"
-"PO-Revision-Date: 2023-08-10 16:55+0200\n"
+"POT-Creation-Date: 2024-01-13 12:18+0000\n"
+"PO-Revision-Date: 2024-03-02 17:27+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -27,6 +27,10 @@ msgstr "Tecla"
 msgid "Preview keyboard layouts"
 msgstr "Podgląd układów klawiatury"
 
-#: src/tecla-application.c:135
+#: src/tecla-application.c:74
+msgid "Display version number"
+msgstr "Wyświetla numer wersji"
+
+#: src/tecla-application.c:155
 msgid "Keyboard Layout"
 msgstr "Układ klawiatury"
