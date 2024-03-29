@@ -1,0 +1,37 @@
+# Serbian translation for tecla.
+# Copyright © 2024 tecla's COPYRIGHT HOLDER
+# This file is distributed under the same license as the tecla package.
+# Милош Поповић <gpopac@gmail.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tecla main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
+"POT-Creation-Date: 2024-03-22 22:15+0000\n"
+"PO-Revision-Date: 2024-03-30 00:16+0100\n"
+"Last-Translator: Милош Поповић <gpopac@gmail.com>\n"
+"Language-Team: Serbian <Serbian <gnome-sr@googlegroups.com>>\n"
+"Language: sr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : "
+"n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2\n"
+"X-Project-Style: gnome\n"
+"X-Generator: Gtranslator 45.3\n"
+
+#: data/org.gnome.Tecla.desktop.in:3
+msgid "Tecla"
+msgstr "Текла"
+
+#: data/org.gnome.Tecla.desktop.in:4
+msgid "Preview keyboard layouts"
+msgstr "Преглед распореда тастатуре"
+
+#: src/tecla-application.c:74
+msgid "Display version number"
+msgstr "Прикажи број издања"
+
+#: src/tecla-application.c:155
+msgid "Keyboard Layout"
+msgstr "Распоред тастатуре"
