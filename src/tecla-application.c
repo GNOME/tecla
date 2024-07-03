@@ -421,6 +421,7 @@ tecla_application_class_init (TeclaApplicationClass *klass)
 static void
 tecla_application_init (TeclaApplication *app)
 {
+	gtk_window_set_default_icon_name ("org.gnome.Tecla");
 	g_application_add_main_option_entries (G_APPLICATION (app), all_options);
 }
 
