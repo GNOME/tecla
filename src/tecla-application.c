@@ -29,6 +29,10 @@
 #include <glib/gi18n.h>
 #include <stdlib.h>
 
+#ifdef GDK_WINDOWING_WAYLAND
+#include <gdk/wayland/gdkwayland.h>
+#endif
+
 typedef struct
 {
 	int level;
@@ -44,6 +48,7 @@ struct _TeclaApplication
 	TeclaKeymapObserver *observer;
 	gchar *layout;
 	gboolean ignore_first_change;
+	gchar *parent_handle;
 };
 
 static GtkPopover *current_popover = NULL;
@@ -71,19 +76,24 @@ tecla_application_command_line (GApplication            *app,
 }
 
 const GOptionEntry all_options[] = {
+	{ "parent-handle", 0, 0, G_OPTION_ARG_STRING, NULL, N_("Attach to a parent window"), N_("Window handle") },
 	{ "version", 0, 0, G_OPTION_ARG_NONE, NULL, N_("Display version number"), NULL },
 	{ NULL, 0, 0, 0, NULL, NULL, NULL } /* end the list */
 };
 
 static int
 tecla_application_handle_local_options (GApplication *app,
-		      GVariantDict *options)
+					GVariantDict *options)
 {
+	TeclaApplication *tecla_app = TECLA_APPLICATION (app);
+
 	if (g_variant_dict_contains (options, "version")) {
 		g_print ("%s %s\n", PACKAGE, VERSION);
 
 		return 0;
 	}
+
+	g_variant_dict_lookup (options, "parent-handle", "s", &tecla_app->parent_handle);
 
 	return -1;
 }
@@ -404,6 +414,18 @@ tecla_application_activate (GApplication *app)
 			update_title (tecla_app->main_window, tecla_app->main_model);
 		}
 	}
+
+#ifdef GDK_WINDOWING_WAYLAND
+	if (tecla_app->parent_handle &&
+	    GDK_IS_WAYLAND_DISPLAY (gtk_widget_get_display (GTK_WIDGET (tecla_app->main_window)))) {
+		GdkSurface *surface;
+
+		gtk_widget_set_visible (GTK_WIDGET (tecla_app->main_window), TRUE);
+		surface = gtk_native_get_surface (GTK_NATIVE (tecla_app->main_window));
+		gdk_wayland_toplevel_set_transient_for_exported (GDK_TOPLEVEL (surface),
+								 tecla_app->parent_handle);
+	}
+#endif
 
 	gtk_window_present (tecla_app->main_window);
 }
