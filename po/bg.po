@@ -3,12 +3,13 @@
 # This file is distributed under the same license as the tecla package.
 # twlvnn kraftwerk <kraft_werk@tutanota.com>, 2024.
 #
+# Resubmit
 msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
 "POT-Creation-Date: 2024-07-15 12:10+0000\n"
-"PO-Revision-Date: 2024-08-31 10:21+0200\n"
+"PO-Revision-Date: 2024-08-31 11:36+0200\n"
 "Last-Translator: twlvnn kraftwerk <kraft_werk@tutanota.com>\n"
 "Language-Team: Bulgarian <dict@ludost.net>\n"
 "Language: bg\n"
