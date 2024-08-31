@@ -1,0 +1,35 @@
+# Bulgarian translation of tecla po-file.
+# Copyright (C) 2024 tecla's twlvnn kraftwerk <kraft_werk@tutanota.com>.
+# This file is distributed under the same license as the tecla package.
+# twlvnn kraftwerk <kraft_werk@tutanota.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tecla main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
+"POT-Creation-Date: 2024-07-15 12:10+0000\n"
+"PO-Revision-Date: 2024-08-31 10:21+0200\n"
+"Last-Translator: twlvnn kraftwerk <kraft_werk@tutanota.com>\n"
+"Language-Team: Bulgarian <dict@ludost.net>\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Generator: Gtranslator 46.1\n"
+
+#: data/org.gnome.Tecla.desktop.in:3
+msgid "Tecla"
+msgstr "Tecla"
+
+#: data/org.gnome.Tecla.desktop.in:4
+msgid "Preview keyboard layouts"
+msgstr "Преглед на подредбите на клавиатурата"
+
+#: src/tecla-application.c:74
+msgid "Display version number"
+msgstr "Показване на версията"
+
+#: src/tecla-application.c:155
+msgid "Keyboard Layout"
+msgstr "Подредба на клавиатурата"
