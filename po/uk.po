@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/-/issues\n"
-"POT-Creation-Date: 2024-01-08 21:44+0000\n"
-"PO-Revision-Date: 2024-01-11 21:15+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
+"POT-Creation-Date: 2024-09-03 20:05+0000\n"
+"PO-Revision-Date: 2024-09-04 19:15+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 23.04.3\n"
 
 #: data/org.gnome.Tecla.desktop.in:3
 msgid "Tecla"
@@ -27,10 +27,18 @@ msgstr "Tecla"
 msgid "Preview keyboard layouts"
 msgstr "Перегляд розкладки клавіатури"
 
-#: src/tecla-application.c:74
+#: src/tecla-application.c:79
+msgid "Attach to a parent window"
+msgstr "Приєднати до батьківського вікна"
+
+#: src/tecla-application.c:79
+msgid "Window handle"
+msgstr "Елемент керування вікном"
+
+#: src/tecla-application.c:80
 msgid "Display version number"
 msgstr "Показати номер версії"
 
-#: src/tecla-application.c:155
+#: src/tecla-application.c:165
 msgid "Keyboard Layout"
 msgstr "Розкладка клавіатури"
