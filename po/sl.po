@@ -8,9 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/-/issues\n"
-"POT-Creation-Date: 2024-01-08 21:44+0000\n"
-"PO-Revision-Date: 2024-01-09 22:15+0100\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
+"POT-Creation-Date: 2024-09-03 20:05+0000\n"
+"PO-Revision-Date: 2024-09-04 16:05+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups."
 "com>\n"
@@ -31,10 +31,18 @@ msgstr "Tekla"
 msgid "Preview keyboard layouts"
 msgstr "Pregled postavitev tipkovnice"
 
-#: src/tecla-application.c:74
+#: src/tecla-application.c:79
+msgid "Attach to a parent window"
+msgstr "Pripni nadrejenemu oknu"
+
+#: src/tecla-application.c:79
+msgid "Window handle"
+msgstr "Ročica okna"
+
+#: src/tecla-application.c:80
 msgid "Display version number"
 msgstr "Prikaži številko različice"
 
-#: src/tecla-application.c:155
+#: src/tecla-application.c:165
 msgid "Keyboard Layout"
 msgstr "Postavitev tipkovnice"
