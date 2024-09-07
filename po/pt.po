@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
-"POT-Creation-Date: 2024-04-10 07:23+0000\n"
-"PO-Revision-Date: 2024-05-03 22:31+0100\n"
+"POT-Creation-Date: 2024-09-03 20:05+0000\n"
+"PO-Revision-Date: 2024-09-07 12:30+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "Language: pt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #: data/org.gnome.Tecla.desktop.in:3
 msgid "Tecla"
@@ -27,10 +27,18 @@ msgstr "Tecla"
 msgid "Preview keyboard layouts"
 msgstr "Pré-visualizar as disposições do teclado"
 
-#: src/tecla-application.c:74
+#: src/tecla-application.c:79
+msgid "Attach to a parent window"
+msgstr "Anexar a uma janela principal"
+
+#: src/tecla-application.c:79
+msgid "Window handle"
+msgstr "Manípulo de janela"
+
+#: src/tecla-application.c:80
 msgid "Display version number"
 msgstr "Mostrar número da versão"
 
-#: src/tecla-application.c:155
+#: src/tecla-application.c:165
 msgid "Keyboard Layout"
 msgstr "Disposição do teclado"
