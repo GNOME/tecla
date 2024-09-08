@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr "Project-Id-Version: tecla main\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/-/issues\n"
-"POT-Creation-Date: 2024-01-13 12:18+0000\n"
-"PO-Revision-Date: 2024-02-15 18:04+0000\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
+"POT-Creation-Date: 2024-09-03 20:05+0000\n"
+"PO-Revision-Date: 2024-09-08 18:04+0000\n"
 "Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -23,10 +23,18 @@ msgstr "Tekla"
 msgid "Preview keyboard layouts"
 msgstr "Aurreikusi teklatuaren diseinuak"
 
-#: src/tecla-application.c:74
+#: src/tecla-application.c:79
+msgid "Attach to a parent window"
+msgstr "Erantsi leiho guraso bati"
+
+#: src/tecla-application.c:79
+msgid "Window handle"
+msgstr "Leihoen maneiua"
+
+#: src/tecla-application.c:80
 msgid "Display version number"
 msgstr "Erakutsi bertsio-zenbakia"
 
-#: src/tecla-application.c:155
+#: src/tecla-application.c:165
 msgid "Keyboard Layout"
 msgstr "Teklatuaren diseinua"
