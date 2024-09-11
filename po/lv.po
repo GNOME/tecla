@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
-"POT-Creation-Date: 2024-02-22 17:51+0000\n"
-"PO-Revision-Date: 2024-02-24 23:26+0200\n"
+"POT-Creation-Date: 2024-09-08 15:33+0000\n"
+"PO-Revision-Date: 2024-09-11 23:19+0300\n"
 "Last-Translator: Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>\n"
 "Language-Team: Latvian <lata-l10n@googlegroups.com>\n"
 "Language: lv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 :"
 " 2);\n"
-"X-Generator: Lokalize 23.08.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: data/org.gnome.Tecla.desktop.in:3
 msgid "Tecla"
@@ -26,11 +26,19 @@ msgstr "Tecla"
 msgid "Preview keyboard layouts"
 msgstr "Priekšskatīt tastatūras izkārtojumus"
 
-#: src/tecla-application.c:74
+#: src/tecla-application.c:79
+msgid "Attach to a parent window"
+msgstr "Pievienot vecāka logam"
+
+#: src/tecla-application.c:79
+msgid "Window handle"
+msgstr "Loga turis"
+
+#: src/tecla-application.c:80
 msgid "Display version number"
 msgstr "Rādīt versijas numuru"
 
-#: src/tecla-application.c:155
+#: src/tecla-application.c:165
 msgid "Keyboard Layout"
 msgstr "Tastatūras izkārtojums"
 
