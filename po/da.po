@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/-/issues\n"
-"POT-Creation-Date: 2024-01-13 12:18+0000\n"
-"PO-Revision-Date: 2024-02-28 15:32+0100\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
+"POT-Creation-Date: 2024-09-08 15:33+0000\n"
+"PO-Revision-Date: 2024-09-11 18:36+0200\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: data/org.gnome.Tecla.desktop.in:3
 msgid "Tecla"
@@ -26,10 +26,18 @@ msgstr "Tecla"
 msgid "Preview keyboard layouts"
 msgstr "Forhåndsvis tastaturlayout"
 
-#: src/tecla-application.c:74
+#: src/tecla-application.c:79
+msgid "Attach to a parent window"
+msgstr "Vedhæft til et overordnet vindue"
+
+#: src/tecla-application.c:79
+msgid "Window handle"
+msgstr "Vindueshåndtag"
+
+#: src/tecla-application.c:80
 msgid "Display version number"
 msgstr "Vis versionsnummer"
 
-#: src/tecla-application.c:155
+#: src/tecla-application.c:165
 msgid "Keyboard Layout"
 msgstr "Tastaturlayout"
