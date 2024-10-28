@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/-/issues\n"
-"POT-Creation-Date: 2024-01-13 12:18+0000\n"
-"PO-Revision-Date: 2024-02-18 17:04+0100\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
+"POT-Creation-Date: 2024-09-08 15:33+0000\n"
+"PO-Revision-Date: 2024-10-28 01:22+0100\n"
 "Last-Translator: Nathan Follens <nfollens@gnome.org>\n"
 "Language-Team: GNOME-NL https://matrix.to/#/#nl:gnome.org\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #: data/org.gnome.Tecla.desktop.in:3
 msgid "Tecla"
@@ -26,10 +26,19 @@ msgstr "Tecla"
 msgid "Preview keyboard layouts"
 msgstr "Voorbeelden van toetsenbordindelingen tonen"
 
-#: src/tecla-application.c:74
+#: src/tecla-application.c:79
+msgid "Attach to a parent window"
+msgstr "Vasthechten aan het hoofdvenster"
+
+# ? - Nathan
+#: src/tecla-application.c:79
+msgid "Window handle"
+msgstr "Venstergrip"
+
+#: src/tecla-application.c:80
 msgid "Display version number"
 msgstr "Versienummer weergeven"
 
-#: src/tecla-application.c:155
+#: src/tecla-application.c:165
 msgid "Keyboard Layout"
 msgstr "Toetsenbordindeling"
