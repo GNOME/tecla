@@ -1,14 +1,14 @@
 # Italian translation for tecla.
 # Copyright (C) 2023 tecla's COPYRIGHT HOLDER
 # This file is distributed under the same license as the tecla package.
-# Davide Ferracin <davide.ferracin@protonmail.com>, 2023.
+# Davide Ferracin <davide.ferracin@protonmail.com>, 2023, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/-/issues\n"
-"POT-Creation-Date: 2023-08-30 12:04+0000\n"
-"PO-Revision-Date: 2023-08-30 22:33+0200\n"
+"POT-Creation-Date: 2024-01-13 12:18+0000\n"
+"PO-Revision-Date: 2024-03-22 20:42+0200\n"
 "Last-Translator: Davide Ferracin <davide.ferracin@protonmail.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -25,6 +25,10 @@ msgstr "Tecla"
 msgid "Preview keyboard layouts"
 msgstr "Anteprime delle disposizioni di tastiera"
 
-#: src/tecla-application.c:135
+#: src/tecla-application.c:74
+msgid "Display version number"
+msgstr "Mostra numero di versione"
+
+#: src/tecla-application.c:155
 msgid "Keyboard Layout"
 msgstr "Disposizione della tastiera"
