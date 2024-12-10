@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
-"POT-Creation-Date: 2024-09-03 20:05+0000\n"
-"PO-Revision-Date: 2024-09-04 21:43+0200\n"
+"POT-Creation-Date: 2024-09-08 15:35+0000\n"
+"PO-Revision-Date: 2024-11-15 22:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: Catalan <gnome@llistes.softcatala.org>\n"
 "Language: ca\n"
@@ -31,7 +31,7 @@ msgstr "Adjunta a la finestra pare"
 
 #: src/tecla-application.c:79
 msgid "Window handle"
-msgstr ""
+msgstr "Manegador («handle») de la finestra"
 
 #: src/tecla-application.c:80
 msgid "Display version number"
