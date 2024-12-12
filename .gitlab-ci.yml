@@ -1,0 +1,136 @@
+include:
+  - remote: "https://gitlab.freedesktop.org/freedesktop/ci-templates/-/raw/b61a03cabbf308e81289f7aaaf0b5a80a34ffb99/templates/ci-fairy.yml"
+  - remote: 'https://gitlab.freedesktop.org/freedesktop/ci-templates/-/raw/b61a03cabbf308e81289f7aaaf0b5a80a34ffb99/templates/fedora.yml'
+  - component: gitlab.gnome.org/GNOME/citemplates/release-service@master
+    inputs:
+      job-stage: "deploy"
+      dist-job-name: "dist"
+      tarball-artifact-path: "build/meson-dist/$CI_PROJECT_NAME-$CI_COMMIT_TAG.tar.xz"
+
+variables:
+  FDO_UPSTREAM_REPO: GNOME/tecla
+
+stages:
+  - check
+  - review
+  - prepare
+  - build
+  - deploy
+
+workflow:
+  rules:
+    # Allow to switch from branch pipelines to MR pipelines seamlessly
+    # https://docs.gitlab.com/ee/ci/jobs/job_control.html#avoid-duplicate-pipelines
+    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS && $CI_PIPELINE_SOURCE == "push"
+      when: never
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    # Don't trigger a branch pipeline if there is an open MR
+    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
+      when: never
+    - if: '$CI_COMMIT_BRANCH'
+    - if: '$CI_COMMIT_TAG'
+
+.manual-pipeline-guard:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_TAG'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    - if: '$CI_COMMIT_BRANCH =~ /^gnome-[0-9-]+$/'
+    # Avoid catchall `when: manual` rule which might
+    # cause duplicate pipelines to be triggered.
+    # https://docs.gitlab.com/ee/ci/jobs/job_control.html#avoid-duplicate-pipelines
+    #
+    # Also make it so pipelines without MR need to be started
+    # manually, since their state will most likely be WIP
+    - if: '$CI_COMMIT_BRANCH'
+      when: 'manual'
+
+.check-template: &check
+  extends:
+    - .fdo.ci-fairy
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - check-junit-report.xml
+    reports:
+      junit: check-junit-report.xml
+  rules:
+    - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^$/'
+      when: never
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
+      when: on_success
+
+repo-sanity:
+  stage: check
+  script:
+    - >
+      if [[ -z "$CI_REGISTRY_IMAGE" ]] ;
+      then
+        echo "The container registry should be enabled in the project general settings panel at $CI_PROJECT_URL/edit" ;
+        exit 1 ;
+      fi
+  <<: *check
+
+check-commit-log:
+  variables:
+    GIT_DEPTH: "100"
+  stage: review
+  script:
+    - ci-fairy check-commits --junit-xml=check-junit-report.xml
+  needs:
+    - repo-sanity
+  <<: *check
+
+check-merge-request:
+  variables:
+    GIT_STRATEGY: none
+  stage: review
+  script:
+    - ci-fairy check-merge-request --require-allow-collaboration --junit-xml=check-junit-report.xml
+  needs:
+    - repo-sanity
+  <<: *check
+
+.tecla.fedora@common:
+  variables:
+    BASE_TAG: '2024-12-11.1'
+    FDO_DISTRIBUTION_PACKAGES:
+      git
+      meson
+    FDO_DISTRIBUTION_EXEC: |
+      dnf builddep -y tecla
+
+.tecla.fedora:latest@x86_64:
+  extends: .tecla.fedora@common
+  variables:
+    FDO_DISTRIBUTION_VERSION: latest
+    FDO_DISTRIBUTION_TAG: "x86_64-${BASE_TAG}"
+
+build-fedora-container@x86_64:
+  extends:
+    - .fdo.container-build@fedora
+    - .tecla.fedora:latest@x86_64
+  stage: prepare
+  variables:
+    GIT_STRATEGY: none
+  rules:
+    - !reference [.manual-pipeline-guard, rules]
+
+.build-template: &build
+  stage: build
+  script:
+    - meson setup build
+    - meson compile -C build
+    - meson dist -C build
+
+dist:
+  extends:
+    - .fdo.distribution-image@fedora
+    - .tecla.fedora:latest@x86_64
+  needs:
+    - build-fedora-container@x86_64
+  artifacts:
+    expose_as: 'Tarball'
+    paths:
+      - build/meson-dist/
+  <<: *build
