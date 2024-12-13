@@ -121,79 +121,79 @@ get_key_label (xkb_keysym_t key)
 		break;
 
 	case GDK_KEY_dead_grave:
-		label = "ˋ";
+		label = "◌̀";
 		break;
 
 	case GDK_KEY_dead_abovecomma:
-		label = "̓";
+		label = "̓◌̓";
 		break;
 
 	case GDK_KEY_dead_abovereversedcomma:
-		label = "̔";
+		label = "̔◌̔";
 		break;
 
 	case GDK_KEY_dead_acute:
-		label = "ˊ";
+		label = "◌́";
 		break;
 
 	case GDK_KEY_dead_circumflex:
-		label = "ˆ";
+		label = "◌̂";
 		break;
 
 	case GDK_KEY_dead_tilde:
-		label = "~";
+		label = "◌̃";
 		break;
 
 	case GDK_KEY_dead_macron:
-		label = "ˉ";
+		label = "◌̄";
 		break;
 
 	case GDK_KEY_dead_breve:
-		label = "˘";
+		label = "◌̆";
 		break;
 
 	case GDK_KEY_dead_abovedot:
-		label = "˙";
+		label = "◌̇";
 		break;
 
 	case GDK_KEY_dead_diaeresis:
-		label = "¨";
+		label = "◌̈";
 		break;
 
 	case GDK_KEY_dead_abovering:
-		label = "˚";
+		label = "◌̊";
 		break;
 
 	case GDK_KEY_dead_doubleacute:
-		label = "˝";
+		label = "◌̋";
 		break;
 
 	case GDK_KEY_dead_caron:
-		label = "ˇ";
+		label = "◌̌";
 		break;
 
 	case GDK_KEY_dead_cedilla:
-		label = "¸";
+		label = "◌̧";
 		break;
 
 	case GDK_KEY_dead_ogonek:
-		label = "˛";
+		label = "◌̨";
 		break;
 
 	case GDK_KEY_dead_belowdot:
-		label = " ̣";
+		label = "◌̣";
 		break;
 
 	case GDK_KEY_dead_hook:
-		label = "̉";
+		label = "◌̉";
 		break;
 
 	case GDK_KEY_dead_horn:
-		label = "̛";
+		label = "◌̛";
 		break;
 
 	case GDK_KEY_dead_stroke:
-		label = "̵";
+		label = "◌̵ ";
 		break;
 
 	case GDK_KEY_dead_hamza:
@@ -202,6 +202,18 @@ get_key_label (xkb_keysym_t key)
 
 	case GDK_KEY_horizconnector:
 		label = "";
+		break;
+
+	case GDK_KEY_dead_belowcomma:
+		label = "◌̦";
+		break;
+
+	case GDK_KEY_dead_greek:
+		label = "a→α";
+		break;
+
+	case GDK_KEY_dead_currency:
+		label = "e→€";
 		break;
 
 	case GDK_KEY_Multi_key:
