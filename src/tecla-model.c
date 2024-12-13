@@ -95,6 +95,52 @@ tecla_model_init (TeclaModel *model)
 {
 }
 
+static struct {
+        gunichar ch;
+        const char *nick;
+} notable_chars[] = {
+        { 0x00a, "⍽"      }, /* NO-BREAK SPACE */
+        { 0x00ad, "SHY"   }, /* SOFT HYPHEN */
+        { 0x034f, "CGJ"   }, /* COMBINING GRAPHEME JOINER */
+        { 0x061c, "ALM"   }, /* ARABIC LETTER MARK */
+        { 0x200b, "ZWS"   }, /* ZERO WIDTH SPACE */
+        { 0x200c, "ZWNJ"  }, /* ZERO WIDTH NON-JOINER */
+        { 0x200d, "ZWJ"   }, /* ZERO WIDTH JOINER */
+        { 0x200e, "LRM"   }, /* LEFT-TO-RIGHT MARK */
+        { 0x200f, "RLM"   }, /* RIGHT-TO-LEFT MARK */
+        { 0x2028, "LS"    }, /* LINE SEPARATOR */
+        { 0x2029, "PS"    }, /* PARAGRAPH SEPARATOR */
+        { 0x202a, "LRE"   }, /* LEFT-TO-RIGHT EMBEDDING */
+        { 0x202b, "RLE"   }, /* RIGHT-TO-LEFT EMBEDDING */
+        { 0x202c, "PDF"   }, /* POP DIRECTIONAL FORMATTING */
+        { 0x202d, "LRO"   }, /* LEFT-TO-RIGHT OVERRIDE */
+        { 0x202e, "RLO"   }, /* RIGHT-TO-LEFT OVERRIDE */
+        { 0x202f, "⍽"     }, /* NARROW NO-BREAK SPACE */
+        { 0x2060, "WJ"    }, /* WORD JOINER */
+        { 0x2061, "FA"    }, /* FUNCTION APPLICATION */
+        { 0x2062, "IT"    }, /* INVISIBLE TIMES */
+        { 0x2063, "IS"    }, /* INVISIBLE SEPARATOR */
+        { 0x2066, "LRI"   }, /* LEFT-TO-RIGHT ISOLATE */
+        { 0x2067, "RLI"   }, /* RIGHT-TO-LEFT ISOLATE */
+        { 0x2068, "FSI"   }, /* FIRST STRONG ISOLATE */
+        { 0x2069, "PDI"   }, /* POP DIRECTIONAL ISOLATE */
+        { 0xfeff, "ZWNBS" }, /* ZERO WIDTH NO-BREAK SPACE */
+};
+
+static const gchar *
+get_unicode_nick (gunichar ch)
+{
+        for (gsize i = 0; i < G_N_ELEMENTS (notable_chars); i++) {
+                if (ch < notable_chars[i].ch)
+                        return NULL;
+
+                if (ch == notable_chars[i].ch)
+                        return notable_chars[i].nick;
+        }
+
+        return NULL;
+}
+
 static gchar *
 get_key_label (xkb_keysym_t key)
 {
@@ -278,9 +324,13 @@ get_key_label (xkb_keysym_t key)
 			buf[g_unichar_to_utf8 (uc, buf)] = '\0';
 			return g_strdup (buf);
 		} else {
+                        const gchar *nick = get_unicode_nick (uc);
 			const gchar *name = gdk_keyval_name (key);
 
-			if (name) {
+                        if (nick) {
+                                label = nick;
+                        }
+			else if (name) {
 				g_autofree gchar *fixed_name = NULL;
 				gchar *p;
 
