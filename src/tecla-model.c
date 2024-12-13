@@ -250,6 +250,82 @@ get_key_label (xkb_keysym_t key)
 		label = "◌̦";
 		break;
 
+	case GDK_KEY_dead_iota:
+		label = "◌ͅ";
+		break;
+
+	case GDK_KEY_dead_doublegrave:
+		label = "◌̏";
+		break;
+
+	case GDK_KEY_dead_belowring:
+		label = "◌̥";
+		break;
+
+	case GDK_KEY_dead_belowmacron:
+		label = "◌̱";
+		break;
+
+	case GDK_KEY_dead_belowcircumflex:
+		label = "◌̭";
+		break;
+
+	case GDK_KEY_dead_belowtilde:
+		label = "◌̰";
+		break;
+
+	case GDK_KEY_dead_belowbreve:
+		label = "◌̮";
+		break;
+
+	case GDK_KEY_dead_belowdiaeresis:
+		label = "◌̤";
+		break;
+
+	case GDK_KEY_dead_lowline:
+		label = "◌̲";
+		break;
+
+	case GDK_KEY_dead_aboveverticalline:
+		label = "◌̍ ";
+		break;
+
+	case GDK_KEY_dead_belowverticalline:
+		label = "◌̩";
+		break;
+
+	case GDK_KEY_dead_longsolidusoverlay:
+		label = "◌̸ ";
+		break;
+
+	case GDK_KEY_dead_voiced_sound:
+		label = "◌゙";
+		break;
+
+	case GDK_KEY_dead_a:
+		label = "◌ͣ";
+		break;
+
+	case GDK_KEY_dead_e:
+		label = "◌ͤ";
+		break;
+
+	case GDK_KEY_dead_i:
+		label = "◌ͥ";
+		break;
+
+	case GDK_KEY_dead_o:
+		label = "◌ͦ";
+		break;
+
+	case GDK_KEY_dead_u:
+		label = "◌ͧ";
+		break;
+
+	case GDK_KEY_dead_small_schwa:
+		label = "◌ᷪ";
+		break;
+
 	case GDK_KEY_dead_greek:
 		label = "a→α";
 		break;
