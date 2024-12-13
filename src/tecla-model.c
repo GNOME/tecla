@@ -108,8 +108,12 @@ get_key_label (xkb_keysym_t key)
 		label = "";
 		break;
 
+	case GDK_KEY_Delete:
+		label = "⌦";
+		break;
+
 	case GDK_KEY_BackSpace:
-		label = "";
+		label = "⌫";
 		break;
 
 	case GDK_KEY_space:
@@ -200,8 +204,9 @@ get_key_label (xkb_keysym_t key)
 		label = "";
 		break;
 
+	case GDK_KEY_ISO_Enter:
 	case GDK_KEY_Return:
-		label = "";
+		label = "⏎";
 		break;
 
 	case GDK_KEY_Shift_L:
@@ -215,7 +220,7 @@ get_key_label (xkb_keysym_t key)
 
 	case GDK_KEY_Tab:
 	case GDK_KEY_ISO_Left_Tab:
-		label = "";
+		label = "⭾";
 		break;
 
 	case GDK_KEY_Alt_L:
