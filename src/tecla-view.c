@@ -427,6 +427,9 @@ update_from_model_foreach (const gchar *name,
 		action = tecla_model_get_key_label (view->model, view->level, name);
 
 	tecla_key_set_label (key, action);
+
+        if (action == NULL || strcmp (action, "") == 0)
+                tecla_key_set_icon (key, tecla_model_get_key_icon (view->model, view->level, name));
 }
 
 static void

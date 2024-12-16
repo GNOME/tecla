@@ -30,4 +30,7 @@ GtkWidget * tecla_key_new (const gchar *name);
 void tecla_key_set_label (TeclaKey    *key,
 			  const gchar *label);
 
+void tecla_key_set_icon  (TeclaKey    *key,
+			  const gchar *icon);
+
 const gchar * tecla_key_get_name (TeclaKey *key);

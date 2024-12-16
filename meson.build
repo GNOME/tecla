@@ -49,6 +49,7 @@ wayland_dep = dependency('wayland-client', required: false)
 adw_dep = dependency('libadwaita-1', version: '>=1.4')
 xkbcommon_dep = dependency('xkbcommon')
 libm_dep = cc.find_library('m')
+librsvg_dep = dependency('librsvg-2.0')
 
 subdir('data')
 subdir('src')

@@ -21,12 +21,15 @@
 #include "tecla-key.h"
 
 #include <math.h>
+#include "svgpaintable.h"
 
 struct _TeclaKey
 {
 	GtkWidget parent_class;
 	gchar *name;
 	gchar *label;
+        gchar *icon;
+        GdkPaintable *paintable;
 };
 
 enum
@@ -34,6 +37,7 @@ enum
 	PROP_0,
 	PROP_NAME,
 	PROP_LABEL,
+        PROP_ICON,
 	N_PROPS,
 };
 
@@ -64,6 +68,9 @@ tecla_key_get_property (GObject    *object,
 	case PROP_LABEL:
 		g_value_set_string (value, key->label);
 		break;
+	case PROP_ICON:
+		g_value_set_string (value, key->icon);
+		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 	}
@@ -85,6 +92,10 @@ tecla_key_set_property (GObject      *object,
 		tecla_key_set_label (TECLA_KEY (object),
 				     g_value_get_string (value));
 		break;
+	case PROP_ICON:
+		tecla_key_set_icon (TECLA_KEY (object),
+				    g_value_get_string (value));
+		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 	}
@@ -97,6 +108,8 @@ tecla_key_finalize (GObject *object)
 
 	g_free (key->name);
 	g_free (key->label);
+	g_free (key->icon);
+        g_clear_object (&key->paintable);
 
 	G_OBJECT_CLASS (tecla_key_parent_class)->finalize (object);
 }
@@ -112,30 +125,38 @@ tecla_key_snapshot (GtkWidget *widget,
 	int width, height, x, y;
 	float scale;
 
-	layout = gtk_widget_create_pango_layout (widget, key->label);
+        width = gtk_widget_get_width (widget);
+        height = gtk_widget_get_height (widget);
+
+        if (key->label && strcmp (key->label, "") != 0)
+        	layout = gtk_widget_create_pango_layout (widget, key->label);
+        else
+        	layout = gtk_widget_create_pango_layout (widget, "M");
+
 	gtk_widget_get_color (widget, &color);
 
-	width = gtk_widget_get_width (widget);
-	height = gtk_widget_get_height (widget);
-	pango_layout_get_pixel_extents (layout, NULL, &rect);
+        pango_layout_get_pixel_extents (layout, NULL, &rect);
 	scale = MIN ((float) height / rect.height * 0.75, 3);
 
-	/* Snap scale to 1/4ths of logical pixels */
+        /* Snap scale to 1/4ths of logical pixels */
 	scale = roundf (scale * 4.0) / 4.0;
 
-	/* Ensure pixel exactness when placing the layout
+        /* Ensure pixel exactness when placing the layout
 	 * centered and scaled on the widget, instead
-	 * of translate/scale/translate.
+         * of translate/scale/translate.
 	 */
-	x = (width / 2) - ((rect.width / 2) * scale);
+        x = (width / 2) - ((rect.width / 2) * scale);
 	y = (height / 2) - ((rect.height / 2) * scale);
 
-	gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (x, y));
-	gtk_snapshot_scale (snapshot, scale, scale);
+        gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (x, y));
 
-	gtk_snapshot_append_layout (snapshot,
-				    layout,
-				    &color);
+        if (key->label && strcmp (key->label, "") != 0) {
+	        gtk_snapshot_scale (snapshot, scale, scale);
+        	gtk_snapshot_append_layout (snapshot, layout, &color);
+        }
+        else if (key->paintable) {
+                gdk_paintable_snapshot (key->paintable, snapshot, rect.width * scale, rect.height * scale);
+        }
 }
 
 static void
@@ -171,6 +192,13 @@ tecla_key_class_init (TeclaKeyClass *klass)
 		g_param_spec_string ("label",
 				     "label",
 				     "label",
+				     NULL,
+				     G_PARAM_READWRITE |
+				     G_PARAM_STATIC_STRINGS);
+	props[PROP_ICON] =
+		g_param_spec_string ("icon",
+				     "icon",
+				     "icon",
 				     NULL,
 				     G_PARAM_READWRITE |
 				     G_PARAM_STATIC_STRINGS);
@@ -231,6 +259,28 @@ tecla_key_set_label (TeclaKey    *key,
 	gtk_widget_queue_draw (GTK_WIDGET (key));
 
         g_object_notify (G_OBJECT (key), "label");
+}
+
+void
+tecla_key_set_icon (TeclaKey    *key,
+		    const gchar *icon)
+{
+	if (g_strcmp0 (icon, key->icon) == 0)
+		return;
+
+	g_free (key->icon);
+        g_clear_object (&key->paintable);
+	key->icon = g_strdup (icon);
+
+        if (key->icon && key->icon[0] != '\0') {
+                GFile *file = g_file_new_for_uri (icon);
+                key->paintable = svg_paintable_new (file);
+                g_object_unref (file);
+        }
+
+	gtk_widget_queue_draw (GTK_WIDGET (key));
+
+        g_object_notify (G_OBJECT (key), "icon");
 }
 
 const gchar *

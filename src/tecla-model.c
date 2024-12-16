@@ -104,7 +104,6 @@ static struct {
         { 0x034f, "CGJ"   }, /* COMBINING GRAPHEME JOINER */
         { 0x061c, "ALM"   }, /* ARABIC LETTER MARK */
         { 0x200b, "ZWS"   }, /* ZERO WIDTH SPACE */
-        { 0x200c, "ZWNJ"  }, /* ZERO WIDTH NON-JOINER */
         { 0x200d, "ZWJ"   }, /* ZERO WIDTH JOINER */
         { 0x200e, "LRM"   }, /* LEFT-TO-RIGHT MARK */
         { 0x200f, "RLM"   }, /* RIGHT-TO-LEFT MARK */
@@ -156,10 +155,12 @@ get_key_label (xkb_keysym_t key)
 
 	case GDK_KEY_Delete:
 		label = "⌦";
+		label = "";
 		break;
 
 	case GDK_KEY_BackSpace:
 		label = "⌫";
+		label = "";
 		break;
 
 	case GDK_KEY_space:
@@ -428,6 +429,19 @@ get_key_label (xkb_keysym_t key)
 	return g_strdup (label);
 }
 
+static gchar *
+get_key_icon (xkb_keysym_t key)
+{
+        gunichar uc;
+
+	uc = gdk_keyval_to_unicode (key);
+
+        if (uc == 0x200c)
+                return g_strdup ("resource:///org/gnome/tecla/keyboard-zwnj-symbolic.svg");
+
+        return NULL;
+}
+
 TeclaModel *
 tecla_model_new_from_xkb_keymap (struct xkb_keymap *xkb_keymap)
 {
@@ -505,6 +519,23 @@ tecla_model_get_key_label (TeclaModel  *model,
 		return NULL;
 
 	return get_key_label (keysym);
+}
+
+gchar *
+tecla_model_get_key_icon (TeclaModel  *model,
+			  int          level,
+			  const gchar *key)
+{
+	xkb_keycode_t keycode;
+	guint keysym;
+
+	keycode = xkb_keymap_key_by_name (model->xkb_keymap, key);
+	keysym = tecla_model_get_keyval (model, level, keycode);
+
+	if (keysym == 0)
+		return NULL;
+
+	return get_key_icon (keysym);
 }
 
 guint
