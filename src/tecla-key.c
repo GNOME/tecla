@@ -229,6 +229,8 @@ tecla_key_set_label (TeclaKey    *key,
 	g_free (key->label);
 	key->label = g_strdup (label);
 	gtk_widget_queue_draw (GTK_WIDGET (key));
+
+        g_object_notify (G_OBJECT (key), "label");
 }
 
 const gchar *
