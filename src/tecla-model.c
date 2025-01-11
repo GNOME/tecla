@@ -192,6 +192,10 @@ get_key_label (xkb_keysym_t key)
 		label = "̵";
 		break;
 
+	case GDK_KEY_dead_hamza:
+		label = "ء";
+		break;
+
 	case GDK_KEY_horizconnector:
 		label = "";
 		break;
