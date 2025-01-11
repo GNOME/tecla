@@ -314,6 +314,10 @@ tecla_model_new_from_layout_name (const gchar *name)
 	};
 
 	sep = strchr (name, '+');
+	if (!sep)
+		sep = strchr (name, ' ');
+	if (!sep)
+		sep = strchr (name, '\t');
 
 	if (sep) {
 		variant = sep + 1;
