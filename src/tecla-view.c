@@ -208,6 +208,9 @@ pair_state (GtkWidget *widget,
 			  G_CALLBACK (bind_state), other_widget);
 	g_signal_connect (other_widget, "state-flags-changed",
 			  G_CALLBACK (bind_state), widget);
+        g_object_bind_property (other_widget, "label",
+                                widget, "label",
+                                G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
 }
 
 static void
