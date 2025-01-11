@@ -1,3 +1,9 @@
+NEW in 48.alpha
+===============
+- Translation updates
+- Support spaces and tabs as separator for keymap+variant
+- A number of new/improved labels for special keys
+
 NEW in 47.0
 ===========
 - Translation updates
