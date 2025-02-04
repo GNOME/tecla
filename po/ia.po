@@ -1,0 +1,49 @@
+# Interlingua translation for tecla.
+# Copyright (C) 2025 tecla's COPYRIGHT HOLDER
+# This file is distributed under the same license as the tecla package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# FULL NAME <EMAIL@ADDRESS>, 2025.
+# Emilio Sepúlveda <emism.translations@gmail.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tecla main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
+"POT-Creation-Date: 2025-01-29 08:54+0000\n"
+"PO-Revision-Date: 2025-02-04 18:21-0300\n"
+"Last-Translator: Emilio Sepúlveda <emism.translations@gmail.com>\n"
+"Language-Team: Interlingua <softinterlingua@gmail.com>\n"
+"Language: ia\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-DL-Lang: ia\n"
+"X-DL-Module: tecla\n"
+"X-DL-Branch: main\n"
+"X-DL-Domain: po\n"
+"X-DL-State: Translating\n"
+"X-Generator: Gtranslator 47.1\n"
+
+#: data/org.gnome.Tecla.desktop.in:3
+msgid "Tecla"
+msgstr "Tecla"
+
+#: data/org.gnome.Tecla.desktop.in:4
+msgid "Preview keyboard layouts"
+msgstr "Previsualisa dispositiones de claviero"
+
+#: src/tecla-application.c:79
+msgid "Attach to a parent window"
+msgstr "Annexar a un fenestra parente"
+
+#: src/tecla-application.c:79
+msgid "Window handle"
+msgstr "Gestion del fenestra"
+
+#: src/tecla-application.c:80
+msgid "Display version number"
+msgstr "Monstrar numero de version"
+
+#: src/tecla-application.c:165
+msgid "Keyboard Layout"
+msgstr "Disposition de claviero"
