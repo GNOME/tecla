@@ -60,14 +60,17 @@ tecla_application_command_line (GApplication            *app,
 				GApplicationCommandLine *cl)
 {
 	TeclaApplication *tecla_app = TECLA_APPLICATION (app);
+	GVariantDict *options;
 	g_autofree GStrv argv = NULL;
 	int argc;
 
+	options = g_application_command_line_get_options_dict (cl);
 	argv = g_application_command_line_get_arguments (cl, &argc);
 
 	if (argc > 1) {
-		g_free (tecla_app->layout);
-		tecla_app->layout = g_strdup (argv[1]);
+		g_set_str (&tecla_app->layout, argv[1]);
+		g_set_str (&tecla_app->parent_handle, NULL);
+		g_variant_dict_lookup (options, "parent-handle", "s", &tecla_app->parent_handle);
 	}
 
 	g_application_activate (app);
@@ -85,15 +88,11 @@ static int
 tecla_application_handle_local_options (GApplication *app,
 					GVariantDict *options)
 {
-	TeclaApplication *tecla_app = TECLA_APPLICATION (app);
-
 	if (g_variant_dict_contains (options, "version")) {
 		g_print ("%s %s\n", PACKAGE, VERSION);
 
 		return 0;
 	}
-
-	g_variant_dict_lookup (options, "parent-handle", "s", &tecla_app->parent_handle);
 
 	return -1;
 }
