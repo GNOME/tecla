@@ -39,15 +39,21 @@ typedef struct
 	guint keyval;
 } KeyInfo;
 
+typedef struct
+{
+	GtkWindow *window;
+	TeclaView *view;
+	TeclaModel *model;
+	gulong remove_handler_id;
+} TeclaInstance;
+
 struct _TeclaApplication
 {
 	GtkApplication parent_instance;
-	GtkWindow *main_window;
-	TeclaView *main_view;
-	TeclaModel *main_model;
 	TeclaKeymapObserver *observer;
+	TeclaInstance main;
+	GList *instances; /* TeclaInstance* */
 	gchar *layout;
-	gboolean ignore_first_change;
 	gchar *parent_handle;
 };
 
@@ -356,18 +362,13 @@ observer_keymap_notify_cb (TeclaKeymapObserver *observer,
 	g_autoptr (TeclaModel) model = NULL;
 	struct xkb_keymap *xkb_keymap;
 
-	if (app->ignore_first_change) {
-		app->ignore_first_change = FALSE;
-		return;
-	}
-
 	xkb_keymap = tecla_keymap_observer_get_keymap (observer);
 	model = tecla_model_new_from_xkb_keymap (xkb_keymap);
-	connect_model (app->main_window,
-		       app->main_view, model);
-	update_title (app->main_window, model);
+	connect_model (app->main.window,
+		       app->main.view, model);
+	update_title (app->main.window, model);
 
-	g_set_object (&app->main_model, model);
+	g_set_object (&app->main.model, model);
 }
 
 static void
@@ -378,55 +379,102 @@ observer_keymap_group_cb (TeclaKeymapObserver *observer,
 	int group;
 
 	group = tecla_keymap_observer_get_group (observer);
-	if (app->main_model)
-		tecla_model_set_group (app->main_model, group);
+	if (app->main.model)
+		tecla_model_set_group (app->main.model, group);
+}
+
+void
+window_removed_cb (TeclaApplication *tecla_app,
+                   GtkWindow        *window,
+                   gpointer          user_data)
+{
+	TeclaInstance *instance = user_data;
+
+	tecla_app->instances =
+		g_list_remove (tecla_app->instances, instance);
+
+	g_signal_handler_disconnect (tecla_app, instance->remove_handler_id);
+
+	g_clear_object (&instance->model);
+	g_free (instance);
+}
+
+void
+main_window_removed_cb (TeclaApplication *tecla_app,
+                        GtkWindow        *window,
+                        gpointer          user_data)
+{
+	if (tecla_app->main.window != window)
+		return;
+
+	g_clear_object (&tecla_app->observer);
+	g_clear_object (&tecla_app->main.model);
+	tecla_app->main.view = NULL;
+	tecla_app->main.window = NULL;
 }
 
 static void
 tecla_application_activate (GApplication *app)
 {
 	TeclaApplication *tecla_app = TECLA_APPLICATION (app);
+	g_autofree char *layout = g_steal_pointer (&tecla_app->layout);
+	g_autofree char *parent_handle = g_steal_pointer (&tecla_app->parent_handle);
 
-	if (!tecla_app->main_window) {
-		tecla_app->main_window =
-			create_window (tecla_app, &tecla_app->main_view);
-
-		tecla_app->ignore_first_change = tecla_app->layout != NULL;
-
-		tecla_app->observer = tecla_keymap_observer_new ();
-		g_signal_connect (tecla_app->observer, "notify::keymap",
-				  G_CALLBACK (observer_keymap_notify_cb), app);
-		g_signal_connect (tecla_app->observer, "notify::group",
-				  G_CALLBACK (observer_keymap_group_cb), app);
-	}
-
-	if (tecla_app->layout) {
-		g_clear_object (&tecla_app->main_model);
-		tecla_app->main_model =
-			tecla_model_new_from_layout_name (tecla_app->layout);
-
-		if (tecla_app->main_model) {
-			connect_model (tecla_app->main_window,
-				       tecla_app->main_view,
-				       tecla_app->main_model);
-			g_clear_pointer (&tecla_app->layout, g_free);
-			update_title (tecla_app->main_window, tecla_app->main_model);
+	if (!layout) {
+		if (!tecla_app->main.window) {
+			tecla_app->main.window =
+				create_window (tecla_app, &tecla_app->main.view);
+			g_signal_connect (tecla_app, "window-removed",
+					  G_CALLBACK (main_window_removed_cb),
+					  NULL);
 		}
-	}
+
+		if (!tecla_app->observer) {
+			tecla_app->observer = tecla_keymap_observer_new ();
+			g_signal_connect (tecla_app->observer, "notify::keymap",
+					  G_CALLBACK (observer_keymap_notify_cb), app);
+			g_signal_connect (tecla_app->observer, "notify::group",
+					  G_CALLBACK (observer_keymap_group_cb), app);
+		}
+
+		gtk_window_present (tecla_app->main.window);
+	} else {
+		TeclaInstance *instance = g_new0 (TeclaInstance, 1);
+
+		instance->window = create_window (tecla_app, &instance->view);
+
+		instance->model =
+			tecla_model_new_from_layout_name (layout);
+
+		if (instance->model) {
+			connect_model (instance->window,
+				       instance->view,
+				       instance->model);
+			update_title (instance->window, instance->model);
+		}
 
 #ifdef GDK_WINDOWING_WAYLAND
-	if (tecla_app->parent_handle &&
-	    GDK_IS_WAYLAND_DISPLAY (gtk_widget_get_display (GTK_WIDGET (tecla_app->main_window)))) {
-		GdkSurface *surface;
+		if (parent_handle &&
+		    GDK_IS_WAYLAND_DISPLAY (gtk_widget_get_display (GTK_WIDGET (instance->window)))) {
+			GdkSurface *surface;
 
-		gtk_widget_set_visible (GTK_WIDGET (tecla_app->main_window), TRUE);
-		surface = gtk_native_get_surface (GTK_NATIVE (tecla_app->main_window));
-		gdk_wayland_toplevel_set_transient_for_exported (GDK_TOPLEVEL (surface),
-								 tecla_app->parent_handle);
-	}
+			gtk_widget_set_visible (GTK_WIDGET (instance->window), TRUE);
+			surface = gtk_native_get_surface (GTK_NATIVE (instance->window));
+			gdk_wayland_toplevel_set_transient_for_exported (GDK_TOPLEVEL (surface),
+									 parent_handle);
+		}
 #endif
 
-	gtk_window_present (tecla_app->main_window);
+		instance->remove_handler_id =
+			g_signal_connect (tecla_app, "window-removed",
+					  G_CALLBACK (window_removed_cb),
+					  instance);
+
+		tecla_app->instances =
+			g_list_prepend (tecla_app->instances, instance);
+
+		gtk_window_present (instance->window);
+	}
 }
 
 static void
