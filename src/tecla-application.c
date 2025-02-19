@@ -458,7 +458,7 @@ tecla_application_activate (GApplication *app)
 		    GDK_IS_WAYLAND_DISPLAY (gtk_widget_get_display (GTK_WIDGET (instance->window)))) {
 			GdkSurface *surface;
 
-			gtk_widget_set_visible (GTK_WIDGET (instance->window), TRUE);
+			gtk_widget_realize (GTK_WIDGET (instance->window));
 			surface = gtk_native_get_surface (GTK_NATIVE (instance->window));
 			gdk_wayland_toplevel_set_transient_for_exported (GDK_TOPLEVEL (surface),
 									 parent_handle);
