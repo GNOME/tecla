@@ -7,6 +7,10 @@ project('tecla', 'c',
     ]
 )
 
+subproject('libgxdp',
+    default_options: 'tests=false',
+)
+
 cc = meson.get_compiler('c')
 
 cc_warning_flags = [
@@ -48,6 +52,7 @@ gtk_wayland_dep = dependency('gtk4-wayland', required: false)
 wayland_dep = dependency('wayland-client', required: false)
 adw_dep = dependency('libadwaita-1', version: '>=1.4')
 xkbcommon_dep = dependency('xkbcommon')
+libgxdp_dep = dependency('libgxdp')
 libm_dep = cc.find_library('m')
 
 subdir('data')
