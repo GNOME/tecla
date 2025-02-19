@@ -20,7 +20,7 @@ source = [
 
 tecla = executable('tecla',
     sources: source,
-    dependencies: [gtk_dep, gtk_wayland_dep, wayland_dep, adw_dep, xkbcommon_dep, libm_dep, libgxdp_dep],
+    dependencies: [gtk_dep, gtk_wayland_dep, wayland_dep, adw_dep, xkbcommon_dep, libm_dep],
     install: true,
     include_directories: [config_inc],
 )

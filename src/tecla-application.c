@@ -27,15 +27,10 @@
 #include "tecla-view.h"
 
 #include <glib/gi18n.h>
-#include <gxdp.h>
 #include <stdlib.h>
 
 #ifdef GDK_WINDOWING_WAYLAND
 #include <gdk/wayland/gdkwayland.h>
-#endif
-
-#ifdef GDK_WINDOWING_X11
-#include <gdk/x11/gdkx.h>
 #endif
 
 typedef struct
@@ -445,8 +440,6 @@ tecla_application_activate (GApplication *app)
 		gtk_window_present (tecla_app->main.window);
 	} else {
 		TeclaInstance *instance = g_new0 (TeclaInstance, 1);
-		g_autofree char *handle = NULL;
-		GdkDisplay *display;
 
 		instance->window = create_window (tecla_app, &instance->view);
 
@@ -460,31 +453,17 @@ tecla_application_activate (GApplication *app)
 			update_title (instance->window, instance->model);
 		}
 
-		display = gtk_widget_get_display (GTK_WIDGET (instance->window));
-
 #ifdef GDK_WINDOWING_WAYLAND
-		if (GDK_IS_WAYLAND_DISPLAY (display))
-			handle = g_strconcat ("wayland:", parent_handle, NULL);
-#endif
-#ifdef GDK_WINDOWING_X11
-		if (GDK_IS_X11_DISPLAY (display))
-			handle = g_strconcat ("x11:", parent_handle, NULL);
-#endif
+		if (parent_handle &&
+		    GDK_IS_WAYLAND_DISPLAY (gtk_widget_get_display (GTK_WIDGET (instance->window)))) {
+			GdkSurface *surface;
 
-		if (handle) {
-			GxdpExternalWindow *external_window;
-
-			external_window =
-				gxdp_external_window_new_from_handle (handle);
-
-			if (external_window) {
-				GdkSurface *surface;
-
-				gtk_widget_realize (GTK_WIDGET (instance->window));
-				surface = gtk_native_get_surface (GTK_NATIVE (instance->window));
-				gxdp_external_window_set_parent_of (external_window, surface);
-			}
+			gtk_widget_set_visible (GTK_WIDGET (instance->window), TRUE);
+			surface = gtk_native_get_surface (GTK_NATIVE (instance->window));
+			gdk_wayland_toplevel_set_transient_for_exported (GDK_TOPLEVEL (surface),
+									 parent_handle);
 		}
+#endif
 
 		instance->remove_handler_id =
 			g_signal_connect (tecla_app, "window-removed",
