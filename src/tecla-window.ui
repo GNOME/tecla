@@ -55,5 +55,6 @@
     </child>
     <property name="default-width">800</property>
     <property name="default-height">400</property>
+    <property name="modal">True</property>
   </object>
 </interface>
