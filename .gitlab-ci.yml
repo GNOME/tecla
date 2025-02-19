@@ -93,12 +93,21 @@ check-merge-request:
 
 .tecla.fedora@common:
   variables:
-    BASE_TAG: '2024-12-11.1'
+    BASE_TAG: '2025-02-19.0'
     FDO_DISTRIBUTION_PACKAGES:
       git
       meson
     FDO_DISTRIBUTION_EXEC: |
-      dnf builddep -y tecla
+      dnf builddep -y tecla && \
+      dnf builddep -y gtk4 && \
+      git clone --depth 1 https://gitlab.gnome.org/GNOME/gtk.git && \
+        cd gtk && \
+        meson setup _build --prefix=/usr && \
+        meson compile -C _build && \
+        meson install -C _build && \
+        cd .. && \
+        rm -rf _build
+
 
 .tecla.fedora:latest@x86_64:
   extends: .tecla.fedora@common
@@ -121,7 +130,7 @@ build-fedora-container@x86_64:
   script:
     - meson setup build
     - meson compile -C build
-    - meson dist -C build
+    - meson dist -C build --include-subprojects
 
 dist:
   extends:
