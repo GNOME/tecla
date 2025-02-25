@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
-"POT-Creation-Date: 2024-04-10 07:23+0000\n"
-"PO-Revision-Date: 2024-04-17 17:01+0530\n"
+"POT-Creation-Date: 2024-09-08 15:33+0000\n"
+"PO-Revision-Date: 2024-09-24 22:12-0700\n"
 "Last-Translator: Scrambled777 <weblate.scrambled777@simplelogin.com>\n"
-"Language-Team: Hindi\n"
+"Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net>\n"
 "Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Gtranslator 46.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Gtranslator 46.1\n"
 
 #: data/org.gnome.Tecla.desktop.in:3
 msgid "Tecla"
@@ -26,10 +26,18 @@ msgstr "Tecla"
 msgid "Preview keyboard layouts"
 msgstr "कीबोर्ड अभिन्यास का पूर्वावलोकन करें"
 
-#: src/tecla-application.c:74
+#: src/tecla-application.c:79
+msgid "Attach to a parent window"
+msgstr "मूल विंडो से संलग्न करें"
+
+#: src/tecla-application.c:79
+msgid "Window handle"
+msgstr "विंडो हैंडल"
+
+#: src/tecla-application.c:80
 msgid "Display version number"
 msgstr "संस्करण संख्या प्रदर्शित करें"
 
-#: src/tecla-application.c:155
+#: src/tecla-application.c:165
 msgid "Keyboard Layout"
 msgstr "कीबोर्ड अभिन्यास"
