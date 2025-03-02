@@ -1,3 +1,9 @@
+NEW in 48.rc
+============
+- Translation updates
+- Improvements to multi-instance for specific layout previews
+- Make window modal when run as a dialog
+
 NEW in 48.alpha
 ===============
 - Translation updates
