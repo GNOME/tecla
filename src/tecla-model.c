@@ -158,11 +158,12 @@ get_key_label (xkb_keysym_t key)
 		break;
 
 	case GDK_KEY_ISO_Level5_Shift:
-		label = "⎇ 5";
+	case GDK_KEY_ISO_Level5_Latch:
+		label = "⎇5";
 		break;
 
 	case GDK_KEY_ISO_Level5_Lock:
-		label = "⎇ 5 Lock";
+		label = "⎇5 Lock";
 		break;
 
 	case GDK_KEY_Delete:

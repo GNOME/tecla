@@ -427,10 +427,10 @@ update_from_model_foreach (const gchar *name,
 		action = g_strdup ("⎇");
 	}
 
-	if (keyval == GDK_KEY_ISO_Level5_Shift) {
+	if (keyval == GDK_KEY_ISO_Level5_Shift || keyval == GDK_KEY_ISO_Level5_Latch) {
 		if (!g_list_find_custom (view->level5_keys, name, (GCompareFunc) g_strcmp0))
 			view->level5_keys = g_list_prepend (view->level5_keys, (gpointer) name);
-		action = g_strdup ("⎇ 5");
+		action = g_strdup ("⎇5");
 	}
 
 	if (!action)
