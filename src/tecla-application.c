@@ -233,21 +233,25 @@ popover_closed_cb (GtkPopover *popover,
 }
 
 static GtkPopover *
-create_popover (TeclaView   *view,
-		TeclaModel  *model,
-		GtkWidget   *widget,
-		const gchar *name)
+create_popover (TeclaView    *view,
+		TeclaModel   *model,
+		GtkWidget    *widget,
+		const gchar  *name,
+		gchar       **a11y_description)
 {
 	int n_levels, i;
 	xkb_keycode_t keycode;
 	GtkPopover *popover;
 	GtkWidget *box;
 	g_autoptr (GArray) key_info = NULL;
+	g_autoptr (GString) a11y_data = NULL;
 
 	keycode = tecla_model_get_key_keycode (model, name);
 	n_levels = tecla_view_get_num_levels (view);
 
 	key_info = g_array_new (FALSE, TRUE, sizeof (KeyInfo));
+
+	a11y_data = g_string_new (_("Key description:"));
 
 	for (i = 0; i < n_levels; i++) {
 		KeyInfo info;
@@ -275,6 +279,7 @@ create_popover (TeclaView   *view,
 		GtkWidget *hbox, *level, *etching, *desc;
 		KeyInfo *info;
 		g_autofree gchar *str;
+		g_autofree gchar *level_a11y = NULL;
 
 		info = &g_array_index (key_info, KeyInfo, i);
 
@@ -296,6 +301,11 @@ create_popover (TeclaView   *view,
 		gtk_box_append (GTK_BOX (hbox), desc);
 
 		gtk_box_append (GTK_BOX (box), hbox);
+
+		g_string_append_printf (a11y_data, _(" Level %d, character %s."),
+					info->level + 1,
+					gdk_keyval_name (info->keyval));
+
 	}
 
 	popover = GTK_POPOVER (gtk_popover_new ());
@@ -306,6 +316,7 @@ create_popover (TeclaView   *view,
 	g_signal_connect_after (popover, "closed",
 			  G_CALLBACK (popover_closed_cb), view);
 
+	*a11y_description = g_strdup (a11y_data->str);
 	return popover;
 }
 
@@ -316,6 +327,7 @@ key_activated_cb (TeclaView   *view,
 		  TeclaModel  *model)
 {
 	GtkPopover *popover;
+	g_autofree gchar *a11y_description = NULL;
 
 	if (current_popover) {
 		if (gtk_widget_get_parent (GTK_WIDGET (current_popover)) == widget) {
@@ -329,13 +341,16 @@ key_activated_cb (TeclaView   *view,
 	if (!widget)
 		return;
 
-	popover = create_popover (view, model, widget, name);
+	popover = create_popover (view, model, widget, name, &a11y_description);
 
 	if (popover) {
 		gtk_widget_set_parent (GTK_WIDGET (popover), widget);
 		gtk_widget_set_state_flags (widget, GTK_STATE_FLAG_ACTIVE, FALSE);
 		gtk_popover_popup (popover);
 		current_popover = popover;
+		gtk_accessible_announce (GTK_ACCESSIBLE (popover),
+					a11y_description,
+					GTK_ACCESSIBLE_ANNOUNCEMENT_PRIORITY_MEDIUM);
 	}
 }
 
