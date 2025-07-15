@@ -297,10 +297,6 @@ create_popover (TeclaView    *view,
 		gtk_widget_set_sensitive (etching, FALSE);
 		gtk_box_append (GTK_BOX (hbox), etching);
 
-		// TODO: apply the same prettification that
-		// tecla-mode.c:get_key_label does
-		// (get uc nick, '_' -> ' ', strip ISO_ prefix, missing: handle KP_XYZ)
-		// TODO: Probably, these should be translateable?
 		desc = gtk_label_new (gdk_keyval_name (info->keyval));
 		gtk_box_append (GTK_BOX (hbox), desc);
 

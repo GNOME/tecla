@@ -159,11 +159,8 @@ get_key_label (xkb_keysym_t key)
 
 	case GDK_KEY_ISO_Level5_Shift:
 	case GDK_KEY_ISO_Level5_Latch:
-		label = "⎇5";
-		break;
-
 	case GDK_KEY_ISO_Level5_Lock:
-		label = "⎇5 Lock";
+		label = "⎇5";
 		break;
 
 	case GDK_KEY_Delete:
@@ -369,8 +366,7 @@ get_key_label (xkb_keysym_t key)
 		break;
 
 	case GDK_KEY_Tab:
-		// label = "⭾";
-		label = "⭲";
+		label = "⭾";
 		break;
 
 	case GDK_KEY_ISO_Left_Tab:
@@ -425,14 +421,6 @@ get_key_label (xkb_keysym_t key)
 		label = "⇣";
 		break;
 
-	case GDK_KEY_Home:
-		label = "⇱";
-		break;
-
-	case GDK_KEY_End:
-		label = "⇲";
-		break;
-
 	case GDK_KEY_Escape:
 		label = "Esc";
 		break;
@@ -443,22 +431,6 @@ get_key_label (xkb_keysym_t key)
 
 	case GDK_KEY_Redo:
 		label = "↷";
-		break;
-
-	case GDK_KEY_Insert:
-		label = "⎀";
-		break;
-
-	case GDK_KEY_Page_Up:
-		label = "⭻";
-		break;
-
-	case GDK_KEY_Page_Down:
-		label = "⭽";
-		break;
-
-	case GDK_KEY_Pointer_EnableKeys:
-		label = "⍓";
 		break;
 
 	default:
