@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
-"POT-Creation-Date: 2025-07-02 14:58+0000\n"
-"PO-Revision-Date: 2025-07-03 11:09+0200\n"
+"POT-Creation-Date: 2025-08-11 00:45+0000\n"
+"PO-Revision-Date: 2025-08-11 12:13+0200\n"
 "Last-Translator: Antonio Marin <gnmer.6qxyg@slmail.me>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 "Language: ro\n"
@@ -20,13 +20,13 @@ msgstr ""
 "20)) ? 1 : 2);\n"
 "X-Generator: Gtranslator 48.0\n"
 
-#: data/org.gnome.Tecla.desktop.in:3
+#: data/org.gnome.Tecla.desktop.in:2
 msgid "Tecla"
 msgstr "Tecla"
 
-#: data/org.gnome.Tecla.desktop.in:4
+#: data/org.gnome.Tecla.desktop.in:3
 msgid "Preview keyboard layouts"
-msgstr "Previzualizează aranjamente de tastatură"
+msgstr "Arată aranjamentele tastaturii"
 
 #: src/tecla-application.c:88
 msgid "Attach to a parent window"
@@ -34,7 +34,7 @@ msgstr "Atașează la fereastra părinte"
 
 #: src/tecla-application.c:88
 msgid "Window handle"
-msgstr "Mânerul ferestrei"
+msgstr "Identificatorul ferestrei"
 
 #: src/tecla-application.c:89
 msgid "Display version number"
@@ -46,9 +46,9 @@ msgstr "Aranjamentul tastaturii"
 
 #: src/tecla-application.c:254
 msgid "Key description:"
-msgstr "Descrierea tastei"
+msgstr "Descrierea tastei:"
 
 #: src/tecla-application.c:305
 #, c-format
 msgid " Level %d, character %s."
-msgstr " Nivel %d, caracter %s."
+msgstr " Nivelul %d, caracterul %s."
