@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: tecla main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
 "POT-Creation-Date: 2025-08-11 00:45+0000\n"
-"PO-Revision-Date: 2025-08-11 11:41+0200\n"
+"PO-Revision-Date: 2025-08-11 12:04+0200\n"
 "Last-Translator: Antonio Marin <gnmer.6qxyg@slmail.me>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 "Language: ro\n"
@@ -26,7 +26,7 @@ msgstr "Tecla"
 
 #: data/org.gnome.Tecla.desktop.in:3
 msgid "Preview keyboard layouts"
-msgstr "Arată aranjamente de tastatură"
+msgstr "Arată aranjamentele tastaturii"
 
 #: src/tecla-application.c:88
 msgid "Attach to a parent window"
@@ -34,7 +34,7 @@ msgstr "Atașează la fereastra părinte"
 
 #: src/tecla-application.c:88
 msgid "Window handle"
-msgstr "Identificator de fereastră"
+msgstr "Identificatorul ferestrei"
 
 #: src/tecla-application.c:89
 msgid "Display version number"
@@ -42,4 +42,4 @@ msgstr "Afișează numărul versiunii"
 
 #: src/tecla-application.c:170
 msgid "Keyboard Layout"
-msgstr "Aranjament de tastatură"
+msgstr "Aranjamentul tastaturii"
