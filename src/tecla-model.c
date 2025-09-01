@@ -150,8 +150,17 @@ get_key_label (xkb_keysym_t key)
 
 	switch (key) {
 	case GDK_KEY_Mode_switch:
-	case GDK_KEY_ISO_Level3_Shift:
 		label = "";
+		break;
+
+	case GDK_KEY_ISO_Level3_Shift:
+		label = "⎇";
+		break;
+
+	case GDK_KEY_ISO_Level5_Shift:
+	case GDK_KEY_ISO_Level5_Latch:
+	case GDK_KEY_ISO_Level5_Lock:
+		label = "⎇5";
 		break;
 
 	case GDK_KEY_Delete:
@@ -339,7 +348,7 @@ get_key_label (xkb_keysym_t key)
 		break;
 
 	case GDK_KEY_Multi_key:
-		label = "";
+		label = "⎄";
 		break;
 
 	case GDK_KEY_ISO_Enter:
@@ -349,7 +358,7 @@ get_key_label (xkb_keysym_t key)
 
 	case GDK_KEY_Shift_L:
 	case GDK_KEY_Shift_R:
-		label = "";
+		label = "⬆";
 		break;
 
 	case GDK_KEY_Caps_Lock:
@@ -357,8 +366,11 @@ get_key_label (xkb_keysym_t key)
 		break;
 
 	case GDK_KEY_Tab:
-	case GDK_KEY_ISO_Left_Tab:
 		label = "⭾";
+		break;
+
+	case GDK_KEY_ISO_Left_Tab:
+		label = "⭰";
 		break;
 
 	case GDK_KEY_Alt_L:
@@ -391,6 +403,34 @@ get_key_label (xkb_keysym_t key)
 
 	case GDK_KEY_nobreakspace:
 		label = "";
+		break;
+
+	case GDK_KEY_Left:
+		label = "⇠";
+		break;
+
+	case GDK_KEY_Right:
+		label = "⇢";
+		break;
+
+	case GDK_KEY_Up:
+		label = "⇡";
+		break;
+
+	case GDK_KEY_Down:
+		label = "⇣";
+		break;
+
+	case GDK_KEY_Escape:
+		label = "Esc";
+		break;
+
+	case GDK_KEY_Undo:
+		label = "↶";
+		break;
+
+	case GDK_KEY_Redo:
+		label = "↷";
 		break;
 
 	default:

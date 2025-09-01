@@ -30,6 +30,7 @@ enum
 {
 	LEVEL2_PRESSED = 1 << 0,
 	LEVEL3_PRESSED = 1 << 1,
+	LEVEL5_PRESSED = 1 << 2,
 };
 
 struct _TeclaView
@@ -42,6 +43,7 @@ struct _TeclaView
 
 	GList *level2_keys;
 	GList *level3_keys;
+	GList *level5_keys;
 	guint toggled_levels;
 	int level;
 };
@@ -119,6 +121,7 @@ tecla_view_finalize (GObject *object)
 	g_hash_table_unref (view->keys_by_name);
 	g_clear_list (&view->level2_keys, NULL);
 	g_clear_list (&view->level3_keys, NULL);
+	g_clear_list (&view->level5_keys, NULL);
 	gtk_widget_unparent (gtk_widget_get_first_child (GTK_WIDGET (view)));
 
 	G_OBJECT_CLASS (tecla_view_parent_class)->finalize (object);
@@ -159,25 +162,22 @@ update_toggled_keys (TeclaView   *view,
 			view->toggled_levels &= ~LEVEL3_PRESSED;
 		else
 			view->toggled_levels |= LEVEL3_PRESSED;
+	} else if (g_list_find_custom (view->level5_keys, name, (GCompareFunc) g_strcmp0)) {
+		if ((view->toggled_levels & LEVEL5_PRESSED) != 0)
+			view->toggled_levels &= ~LEVEL5_PRESSED;
+		else
+			view->toggled_levels |= LEVEL5_PRESSED;
 	}
 
 	update_toggled_key_list (view, view->level2_keys, LEVEL2_PRESSED);
 	update_toggled_key_list (view, view->level3_keys, LEVEL3_PRESSED);
+	update_toggled_key_list (view, view->level5_keys, LEVEL5_PRESSED);
 }
 
 static void
 update_level (TeclaView *view)
 {
-	int level;
-
-	if (view->toggled_levels == (LEVEL2_PRESSED | LEVEL3_PRESSED))
-		level = 3;
-	else if (view->toggled_levels == LEVEL3_PRESSED)
-		level = 2;
-	else if (view->toggled_levels == LEVEL2_PRESSED)
-		level = 1;
-	else
-		level = 0;
+	int level = view->toggled_levels & (LEVEL5_PRESSED | LEVEL3_PRESSED | LEVEL2_PRESSED);
 
 	if (view->level == level)
 		return;
@@ -411,6 +411,10 @@ update_from_model_foreach (const gchar *name,
 	keycode = tecla_model_get_key_keycode (view->model, name);
 	keyval = tecla_model_get_keyval (view->model, 0, keycode);
 
+	if (keyval == 0)
+		return;
+
+	// For modifier keys, always display the symbol for level 0
 	if (keyval == GDK_KEY_Shift_L || keyval == GDK_KEY_Shift_R) {
 		if (!g_list_find_custom (view->level2_keys, name, (GCompareFunc) g_strcmp0))
 			view->level2_keys = g_list_prepend (view->level2_keys, (gpointer) name);
@@ -423,7 +427,14 @@ update_from_model_foreach (const gchar *name,
 		action = g_strdup ("⎇");
 	}
 
+	if (keyval == GDK_KEY_ISO_Level5_Shift || keyval == GDK_KEY_ISO_Level5_Latch) {
+		if (!g_list_find_custom (view->level5_keys, name, (GCompareFunc) g_strcmp0))
+			view->level5_keys = g_list_prepend (view->level5_keys, (gpointer) name);
+		action = g_strdup ("⎇5");
+	}
+
 	if (!action)
+		// For all other keys, use the symbol for the current level
 		action = tecla_model_get_key_label (view->model, view->level, name);
 
 	tecla_key_set_label (key, action);
@@ -451,10 +462,12 @@ model_changed_cb (TeclaModel *model,
 	view->level = 0;
 	update_toggled_key_list (view, view->level2_keys, LEVEL2_PRESSED);
 	update_toggled_key_list (view, view->level3_keys, LEVEL3_PRESSED);
+	update_toggled_key_list (view, view->level5_keys, LEVEL5_PRESSED);
 	update_level (view);
 
 	g_clear_list (&view->level2_keys, NULL);
 	g_clear_list (&view->level3_keys, NULL);
+	g_clear_list (&view->level5_keys, NULL);
 
 	update_view (view);
 
@@ -495,23 +508,19 @@ void
 tecla_view_set_current_level (TeclaView *view,
 			      int        level)
 {
-	guint toggled_levels = 0;
-
-	if (level == 3 || level == 2)
-		toggled_levels |= LEVEL3_PRESSED;
-	if (level == 3 || level == 1)
-		toggled_levels |= LEVEL2_PRESSED;
-
-	view->toggled_levels = toggled_levels;
+	view->toggled_levels = (guint) level & (LEVEL5_PRESSED | LEVEL3_PRESSED | LEVEL2_PRESSED);
 	update_toggled_key_list (view, view->level2_keys, LEVEL2_PRESSED);
 	update_toggled_key_list (view, view->level3_keys, LEVEL3_PRESSED);
+	update_toggled_key_list (view, view->level5_keys, LEVEL5_PRESSED);
 	update_level (view);
 }
 
 int
 tecla_view_get_num_levels (TeclaView *view)
 {
-	if (view->level2_keys && view->level3_keys)
+	if (view->level2_keys && view->level3_keys && view->level5_keys)
+		return 8;
+	else if (view->level2_keys && view->level3_keys)
 		return 4;
 	else if (view->level3_keys || view->level2_keys)
 		return 2;
