@@ -348,7 +348,7 @@ key_activated_cb (TeclaView   *view,
 		gtk_widget_set_state_flags (widget, GTK_STATE_FLAG_ACTIVE, FALSE);
 		gtk_popover_popup (popover);
 		current_popover = popover;
-		gtk_accessible_announce (GTK_ACCESSIBLE (popover),
+		gtk_accessible_announce (GTK_ACCESSIBLE (view),
 					a11y_description,
 					GTK_ACCESSIBLE_ANNOUNCEMENT_PRIORITY_MEDIUM);
 	}
