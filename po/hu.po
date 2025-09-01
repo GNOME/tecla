@@ -1,14 +1,14 @@
 # Hungarian translation for tecla.
-# Copyright (C) 2023, 2024 Free Software Foundation, Inc.
+# Copyright (C) 2023, 2024, 2025 Free Software Foundation, Inc.
 # This file is distributed under the same license as the tecla package.
 #
-# Balázs Úr <ur.balazs at fsf dot hu>, 2023, 2024.
+# Balázs Úr <ur.balazs at fsf dot hu>, 2023, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
-"POT-Creation-Date: 2024-09-03 20:05+0000\n"
-"PO-Revision-Date: 2024-09-08 09:06+0200\n"
+"POT-Creation-Date: 2025-09-01 11:55+0000\n"
+"PO-Revision-Date: 2025-09-01 14:11+0200\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
@@ -16,29 +16,37 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.12.3\n"
 
-#: data/org.gnome.Tecla.desktop.in:3
+#: data/org.gnome.Tecla.desktop.in:2
 msgid "Tecla"
 msgstr "Tekla"
 
-#: data/org.gnome.Tecla.desktop.in:4
+#: data/org.gnome.Tecla.desktop.in:3
 msgid "Preview keyboard layouts"
 msgstr "Billentyűzetkiosztások előnézete"
 
-#: src/tecla-application.c:79
+#: src/tecla-application.c:88
 msgid "Attach to a parent window"
 msgstr "Csatolás a szülő ablakhoz"
 
-#: src/tecla-application.c:79
+#: src/tecla-application.c:88
 msgid "Window handle"
 msgstr "Ablakfogantyú"
 
-#: src/tecla-application.c:80
+#: src/tecla-application.c:89
 msgid "Display version number"
 msgstr "Verziószám megjelenítése"
 
-#: src/tecla-application.c:165
+#: src/tecla-application.c:170
 msgid "Keyboard Layout"
 msgstr "Billentyűzetkiosztás"
 
+#: src/tecla-application.c:254
+msgid "Key description:"
+msgstr "Billentyű leírása:"
+
+#: src/tecla-application.c:305
+#, c-format
+msgid " Level %d, character %s."
+msgstr " %d. szint, %s karakter."
