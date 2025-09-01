@@ -1,14 +1,14 @@
 # Danish translation for tecla.
 # Copyright (C) 2023 tecla's COPYRIGHT HOLDER
 # This file is distributed under the same license as the tecla package.
-# Alan Mortensen <alanmortensen.am@gmail.com>, 2023.
+# Alan Mortensen <alanmortensen.am@gmail.com>, 2023, 25.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
-"POT-Creation-Date: 2024-09-08 15:33+0000\n"
-"PO-Revision-Date: 2024-09-11 18:36+0200\n"
+"POT-Creation-Date: 2025-08-16 15:31+0000\n"
+"PO-Revision-Date: 2025-08-31 16:15+0200\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -18,26 +18,35 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: data/org.gnome.Tecla.desktop.in:3
+#: data/org.gnome.Tecla.desktop.in:2
 msgid "Tecla"
 msgstr "Tecla"
 
-#: data/org.gnome.Tecla.desktop.in:4
+#: data/org.gnome.Tecla.desktop.in:3
 msgid "Preview keyboard layouts"
 msgstr "Forhåndsvis tastaturlayout"
 
-#: src/tecla-application.c:79
+#: src/tecla-application.c:88
 msgid "Attach to a parent window"
 msgstr "Vedhæft til et overordnet vindue"
 
-#: src/tecla-application.c:79
+#: src/tecla-application.c:88
 msgid "Window handle"
 msgstr "Vindueshåndtag"
 
-#: src/tecla-application.c:80
+#: src/tecla-application.c:89
 msgid "Display version number"
 msgstr "Vis versionsnummer"
 
-#: src/tecla-application.c:165
+#: src/tecla-application.c:170
 msgid "Keyboard Layout"
 msgstr "Tastaturlayout"
+
+#: src/tecla-application.c:254
+msgid "Key description:"
+msgstr "Nøglebeskrivelse:"
+
+#: src/tecla-application.c:305
+#, c-format
+msgid " Level %d, character %s."
+msgstr " Niveau %d, tegn %s."
