@@ -1,40 +1,49 @@
 # Basque translation for tecla.
 # Copyright (C) 2023 tecla's COPYRIGHT HOLDER
 # This file is distributed under the same license as the tecla package.
-# Asier Sarasua Garmendia <asiersarasua@ni.eus>, 2023, 2024.
+# Asier Saratsua Garmendia <asiersarasua@ni.eus>, 2023, 2024, 2025.
 #
 msgid ""
 msgstr "Project-Id-Version: tecla main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
-"POT-Creation-Date: 2024-09-03 20:05+0000\n"
-"PO-Revision-Date: 2024-09-08 18:04+0000\n"
-"Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
+"POT-Creation-Date: 2025-09-01 14:17+0000\n"
+"PO-Revision-Date: 2025-09-04 18:04+0000\n"
+"Last-Translator: Asier Saratsua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/org.gnome.Tecla.desktop.in:3
+#: data/org.gnome.Tecla.desktop.in:2
 msgid "Tecla"
 msgstr "Tekla"
 
-#: data/org.gnome.Tecla.desktop.in:4
+#: data/org.gnome.Tecla.desktop.in:3
 msgid "Preview keyboard layouts"
 msgstr "Aurreikusi teklatuaren diseinuak"
 
-#: src/tecla-application.c:79
+#: src/tecla-application.c:88
 msgid "Attach to a parent window"
 msgstr "Erantsi leiho guraso bati"
 
-#: src/tecla-application.c:79
+#: src/tecla-application.c:88
 msgid "Window handle"
 msgstr "Leihoen maneiua"
 
-#: src/tecla-application.c:80
+#: src/tecla-application.c:89
 msgid "Display version number"
 msgstr "Erakutsi bertsio-zenbakia"
 
-#: src/tecla-application.c:165
+#: src/tecla-application.c:170
 msgid "Keyboard Layout"
 msgstr "Teklatuaren diseinua"
+
+#: src/tecla-application.c:254
+msgid "Key description:"
+msgstr "Teklaren deskribapena"
+
+#: src/tecla-application.c:305
+#, c-format
+msgid " Level %d, character %s."
+msgstr " %d maila, %s karakterea."
