@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
-"POT-Creation-Date: 2025-02-19 13:17+0000\n"
-"PO-Revision-Date: 2025-03-02 04:45+0900\n"
+"POT-Creation-Date: 2025-09-05 17:02+0000\n"
+"PO-Revision-Date: 2025-09-06 20:09+0900\n"
 "Last-Translator: DaeHyun Sung <sungdh86+git@gmail.com>\n"
 "Language-Team: Korean <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
@@ -17,28 +17,37 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.7\n"
 
-#: data/org.gnome.Tecla.desktop.in:3
+#: data/org.gnome.Tecla.desktop.in:2
 msgid "Tecla"
 msgstr "테클라"
 
-#: data/org.gnome.Tecla.desktop.in:4
+#: data/org.gnome.Tecla.desktop.in:3
 msgid "Preview keyboard layouts"
 msgstr "키보드 배치 미리보기"
 
-#: src/tecla-application.c:93
+#: src/tecla-application.c:88
 msgid "Attach to a parent window"
 msgstr "상위 창에 연결"
 
-#: src/tecla-application.c:93
+#: src/tecla-application.c:88
 msgid "Window handle"
 msgstr "창 핸들"
 
-#: src/tecla-application.c:94
+#: src/tecla-application.c:89
 msgid "Display version number"
 msgstr "버전 번호 표시"
 
-#: src/tecla-application.c:175
+#: src/tecla-application.c:170
 msgid "Keyboard Layout"
 msgstr "키보드 배치"
+
+#: src/tecla-application.c:254
+msgid "Key description:"
+msgstr "키 설명:"
+
+#: src/tecla-application.c:305
+#, c-format
+msgid " Level %d, character %s."
+msgstr " 레벨 %d, 문자 %s."
