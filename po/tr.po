@@ -10,37 +10,46 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
-"POT-Creation-Date: 2024-09-03 20:05+0000\n"
-"PO-Revision-Date: 2024-09-05 08:00+0300\n"
-"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
+"POT-Creation-Date: 2025-09-04 14:30+0000\n"
+"PO-Revision-Date: 2025-09-04 19:32+0300\n"
+"Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.7\n"
 
-#: data/org.gnome.Tecla.desktop.in:3
+#: data/org.gnome.Tecla.desktop.in:2
 msgid "Tecla"
 msgstr "Tecla"
 
-#: data/org.gnome.Tecla.desktop.in:4
+#: data/org.gnome.Tecla.desktop.in:3
 msgid "Preview keyboard layouts"
 msgstr "Klavye düzenlerini ön izle"
 
-#: src/tecla-application.c:79
+#: src/tecla-application.c:88
 msgid "Attach to a parent window"
 msgstr "Ebeveyn pencereye bağla"
 
-#: src/tecla-application.c:79
+#: src/tecla-application.c:88
 msgid "Window handle"
 msgstr "Pencere tutamacı"
 
-#: src/tecla-application.c:80
+#: src/tecla-application.c:89
 msgid "Display version number"
 msgstr "Sürüm numarasını göster"
 
-#: src/tecla-application.c:165
+#: src/tecla-application.c:170
 msgid "Keyboard Layout"
 msgstr "Klavye Düzeni"
+
+#: src/tecla-application.c:254
+msgid "Key description:"
+msgstr "Anahtar açıklaması:"
+
+#: src/tecla-application.c:305
+#, c-format
+msgid " Level %d, character %s."
+msgstr " Düzey %d, karakter %s."
