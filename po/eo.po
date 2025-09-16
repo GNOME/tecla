@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
-"POT-Creation-Date: 2025-03-02 08:57+0000\n"
-"PO-Revision-Date: 2025-05-24 18:47+0200\n"
+"POT-Creation-Date: 2025-09-14 11:27+0000\n"
+"PO-Revision-Date: 2025-09-16 22:54+0200\n"
 "Last-Translator: Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>\n"
 "Language-Team: Esperanto <gnome-eo-list@gnome.org>\n"
 "Language: eo\n"
@@ -16,13 +16,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"X-Generator: Gtranslator 42.0\n"
+"X-Generator: Gtranslator 48.0\n"
+
+#: data/org.gnome.Tecla.desktop.in:2
+msgid "Tecla"
+msgstr "Teklo"
 
 #: data/org.gnome.Tecla.desktop.in:3
-msgid "Tecla"
-msgstr "Tecla"
-
-#: data/org.gnome.Tecla.desktop.in:4
 msgid "Preview keyboard layouts"
 msgstr "Antaŭrigardu klavarajn aranĝojn"
 
@@ -41,3 +41,12 @@ msgstr "Montri versionumeron"
 #: src/tecla-application.c:170
 msgid "Keyboard Layout"
 msgstr "Klavara aranĝo"
+
+#: src/tecla-application.c:254
+msgid "Key description:"
+msgstr "Priskribo de la ŝlosilo:"
+
+#: src/tecla-application.c:305
+#, c-format
+msgid " Level %d, character %s."
+msgstr " Nivelo %d, karaktero %s."
