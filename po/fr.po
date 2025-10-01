@@ -3,47 +3,57 @@
 # This file is distributed under the same license as the tecla package.
 # Guillaume Bernard <associations@guillaume-bernard.fr>, 2023.
 # Irénée THIRION <irenee.thirion@e.email>, 2024.
+# Julien Humbert <julroy67@gmail.com>, 2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
-"POT-Creation-Date: 2024-09-08 15:33+0000\n"
-"PO-Revision-Date: 2024-09-13 10:29+0200\n"
-"Last-Translator: Irénée Thirion <irenee.thirion@e.email>\n"
+"POT-Creation-Date: 2025-09-10 23:35+0000\n"
+"PO-Revision-Date: 2025-09-11 13:25+0900\n"
+"Last-Translator: Julien Humbert <julroy67@gmail.com>\n"
 "Language-Team: French <gnomefr@traduc.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Gtranslator 48.0\n"
 "X-DL-Lang: fr\n"
 "X-DL-Module: tecla\n"
 "X-DL-Branch: main\n"
 "X-DL-Domain: po\n"
 "X-DL-State: Translating\n"
 
-#: data/org.gnome.Tecla.desktop.in:3
+#: data/org.gnome.Tecla.desktop.in:2
 msgid "Tecla"
 msgstr "Tecla"
 
-#: data/org.gnome.Tecla.desktop.in:4
+#: data/org.gnome.Tecla.desktop.in:3
 msgid "Preview keyboard layouts"
 msgstr "Aperçu des agencements de clavier"
 
-#: src/tecla-application.c:79
+#: src/tecla-application.c:88
 msgid "Attach to a parent window"
 msgstr "Attacher à une fenêtre parente"
 
-#: src/tecla-application.c:79
+#: src/tecla-application.c:88
 msgid "Window handle"
 msgstr "Poignée de la fenêtre"
 
-#: src/tecla-application.c:80
+#: src/tecla-application.c:89
 msgid "Display version number"
 msgstr "Afficher le numéro de version"
 
-#: src/tecla-application.c:165
+#: src/tecla-application.c:170
 msgid "Keyboard Layout"
 msgstr "Agencement du clavier"
+
+#: src/tecla-application.c:254
+msgid "Key description:"
+msgstr "Description de la clé :"
+
+#: src/tecla-application.c:305
+#, c-format
+msgid " Level %d, character %s."
+msgstr " Niveau %d, caractère %s."
