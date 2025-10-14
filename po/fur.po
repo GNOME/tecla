@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
-"POT-Creation-Date: 2024-09-08 15:33+0000\n"
-"PO-Revision-Date: 2024-10-14 13:01+0000\n"
+"POT-Creation-Date: 2025-10-11 03:15+0000\n"
+"PO-Revision-Date: 2025-10-14 17:29+0200\n"
 "Last-Translator: Fabio T. <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <f.t.public@gmail.com>\n"
 "Language: fur\n"
@@ -16,28 +16,37 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Editor: HaiPO 2.0 beta\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
-#: data/org.gnome.Tecla.desktop.in:3
+#: data/org.gnome.Tecla.desktop.in:2
 msgid "Tecla"
 msgstr "Tecla"
 
-#: data/org.gnome.Tecla.desktop.in:4
+#: data/org.gnome.Tecla.desktop.in:3
 msgid "Preview keyboard layouts"
 msgstr "Anteprime disposizions tastieris"
 
-#: src/tecla-application.c:79
+#: src/tecla-application.c:88
 msgid "Attach to a parent window"
 msgstr "Tache al barcon gjenitôr"
 
-#: src/tecla-application.c:79
+#: src/tecla-application.c:88
 msgid "Window handle"
 msgstr "Mantie dal barcon"
 
-#: src/tecla-application.c:80
+#: src/tecla-application.c:89
 msgid "Display version number"
 msgstr "Visualize numar di version"
 
-#: src/tecla-application.c:165
+#: src/tecla-application.c:170
 msgid "Keyboard Layout"
 msgstr "Disposizion de tastiere"
+
+#: src/tecla-application.c:254
+msgid "Key description:"
+msgstr "Descrizion dal tast:"
+
+#: src/tecla-application.c:305
+#, c-format
+msgid " Level %d, character %s."
+msgstr " Nivel %d, caratar %s."
