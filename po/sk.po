@@ -448,7 +448,7 @@ msgstr " Úroveň %d, znak %s."
 #~ "GtkSourceView."
 
 #~ msgid "\"Projects\""
-#~ msgstr "\"Projekty\""
+#~ msgstr "„Projekty“"
 
 #~ msgid "Projects directory"
 #~ msgstr "Adresár projektov"
