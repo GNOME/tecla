@@ -1,0 +1,50 @@
+# Lao translation for tecla.
+# Copyright (C) 2025 tecla's COPYRIGHT HOLDER
+# This file is distributed under the same license as the tecla package.
+# bone NI <bounkirdni@gmail.com>,  2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tecla main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
+"POT-Creation-Date: 2025-09-20 14:21+0000\n"
+"PO-Revision-Date: 2025-09-20 14:21+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Lao <lo@li.org>\n"
+"Language: lo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/org.gnome.Tecla.desktop.in:2
+msgid "Tecla"
+msgstr "Tecla"
+
+#: data/org.gnome.Tecla.desktop.in:3
+msgid "Preview keyboard layouts"
+msgstr "ເບິ່ງຕົວຢ່າງໂຄງຮ່າງແປ້ນພິມ"
+
+#: src/tecla-application.c:88
+msgid "Attach to a parent window"
+msgstr "ຕິດໃສ່ໜ້າຕ່າງແມ່"
+
+#: src/tecla-application.c:88
+msgid "Window handle"
+msgstr "ຕົວລະບຸໜ້າຕ່າງ"
+
+#: src/tecla-application.c:89
+msgid "Display version number"
+msgstr "ສະແດງເລກລຸ້ນ"
+
+#: src/tecla-application.c:170
+msgid "Keyboard Layout"
+msgstr "ໂຄງຮ່າງແປ້ນພິມ"
+
+#: src/tecla-application.c:254
+msgid "Key description:"
+msgstr "ຄຳອະທິບາຍປຸ່ມ:"
+
+#: src/tecla-application.c:305
+#, c-format
+msgid " Level %d, character %s."
+msgstr " ລະດັບ %d, ຕົວອັກສອນ %s."
