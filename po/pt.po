@@ -4,20 +4,21 @@
 # Hugo Carvalho <hugokarvalho@hotmail.com>, 2023, 2024.
 # Luís Da Costa <luisdc@libretrend.com>, 2024.
 #
+# SPDX-FileCopyrightText: 2026 Cátia Silva <catias89@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
-"POT-Creation-Date: 2025-09-14 11:27+0000\n"
-"PO-Revision-Date: 2025-09-14 16:22+0100\n"
-"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
-"Language-Team: Portuguese <pt@li.org>\n"
+"POT-Creation-Date: 2025-07-08 12:07+0000\n"
+"PO-Revision-Date: 2026-10-18 11:42+0100\n"
+"Last-Translator: Cátia Silva <catias89@gmail.com>\n"
+"Language-Team: Portuguese <li@pt.corg>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: data/org.gnome.Tecla.desktop.in:2
 msgid "Tecla"
@@ -33,11 +34,11 @@ msgstr "Anexar a uma janela principal"
 
 #: src/tecla-application.c:88
 msgid "Window handle"
-msgstr "Manípulo de janela"
+msgstr "Manípulo da janela"
 
 #: src/tecla-application.c:89
 msgid "Display version number"
-msgstr "Mostrar número da versão"
+msgstr "Apresentar número da versão"
 
 #: src/tecla-application.c:170
 msgid "Keyboard Layout"
@@ -45,9 +46,10 @@ msgstr "Disposição do teclado"
 
 #: src/tecla-application.c:254
 msgid "Key description:"
-msgstr "Descrição:"
+msgstr "Descrição da tecla:"
 
 #: src/tecla-application.c:305
 #, c-format
 msgid " Level %d, character %s."
-msgstr " Nível %d, caracter %s."
+msgstr " Nível %d, caractere %s."
+
