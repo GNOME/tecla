@@ -1,0 +1,52 @@
+# Māori translation of tecla.
+# Copyright (C) 2026 the tecla authors.
+# This file is distributed under the same licence as the tecla package.
+# Arlewatyerre Tuhoro-Bell <aidan@ursa.nz>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tecla gnome-51\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
+"POT-Creation-Date: 2025-07-08 12:07+0000\n"
+"PO-Revision-Date: 2026-10-19 14:16+1300\n"
+"Last-Translator: Arlewatyerre Tuhoro-Bell <aidan@ursa.nz>\n"
+"Language-Team: Māori <https://gitlab.gnome.org/Teams/Translation/mi>\n"
+"Language: mi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: gnomi\n"
+
+#: data/org.gnome.Tecla.desktop.in:2
+msgid "Tecla"
+msgstr ""
+
+#: data/org.gnome.Tecla.desktop.in:3
+msgid "Preview keyboard layouts"
+msgstr ""
+
+#: src/tecla-application.c:88
+msgid "Attach to a parent window"
+msgstr ""
+
+#: src/tecla-application.c:88
+msgid "Window handle"
+msgstr ""
+
+#: src/tecla-application.c:89
+msgid "Display version number"
+msgstr "Whakaatu i te nama putanga"
+
+#: src/tecla-application.c:170
+msgid "Keyboard Layout"
+msgstr ""
+
+#: src/tecla-application.c:254
+msgid "Key description:"
+msgstr ""
+
+#: src/tecla-application.c:305
+#, c-format
+msgid " Level %d, character %s."
+msgstr ""
