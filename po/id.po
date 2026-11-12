@@ -3,21 +3,21 @@
 # This file is distributed under the same license as the tecla package.
 # Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2023, 2024.
 # Andika Triwidada <andika@gmail.com>, 2024.
-#
 # herpiko <herpiko@gmail.com>, 2026.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: tecla main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/tecla/issues\n"
 "POT-Creation-Date: 2025-07-08 12:07+0000\n"
-"PO-Revision-Date: 2026-11-08 17:45+0000\n"
-"Last-Translator: herpiko <herpiko@gmail.com>\n"
+"PO-Revision-Date: 2026-11-11 12:07+0000\n"
+"Last-Translator: Herpiko Dwi Aguno <herpiko@gmail.com>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pelokalan\n"
+"X-Generator: pelokalan.blankon.id\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: data/org.gnome.Tecla.desktop.in:2
@@ -51,4 +51,4 @@ msgstr "Deskripsi tombol:"
 #: src/tecla-application.c:305
 #, c-format
 msgid " Level %d, character %s."
-msgstr "Tingkat %d, karakter %s."
+msgstr " Tingkat %d, karakter %s."
